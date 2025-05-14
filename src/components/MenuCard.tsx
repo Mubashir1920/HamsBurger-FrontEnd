@@ -37,7 +37,7 @@ const MenuCard: React.FC<MenuCardProps> = ({ image, title, desc, price, onClick 
       {/* Add to Cart Button */}
       <button
         onClick={onClick}
-        className="mt-4 bg-theme-red hover:bg-yellow-700 cursor-pointer uppercase font-semibold text-white font-poppin py-2 px-4 rounded-xl transition-all duration-200 ease-in-out"
+        className="mt-4 bg-theme-red hover:bg-yellow-700 cursor-pointer uppercase font-semibold text-white font-poppin py-2 px-4 rounded-md transition-all duration-200 ease-in-out"
       >
         Add to Cart
       </button>

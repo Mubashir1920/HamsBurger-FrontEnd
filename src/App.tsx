@@ -16,10 +16,9 @@ import { Routes, Route } from "react-router";
 
 function App() {
 
-
   return (
     <>
-      <ReactLenis root>
+      <ReactLenis root options={{ smoothWheel: true, touchMultiplier: 2 }}>
         <Navbar />
         <div className="pt-20" ></div>
         <Routes>
