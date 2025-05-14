@@ -18,7 +18,7 @@ function App() {
 
   return (
     <>
-      <ReactLenis root options={{ smoothWheel: true, touchMultiplier: 2 }}>
+      <ReactLenis root options={{ smoothWheel: true, touchMultiplier: 1 }}>
         <Navbar />
         <div className="pt-20" ></div>
         <Routes>
