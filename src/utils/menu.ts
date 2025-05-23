@@ -1,4 +1,4 @@
-type MenuItem = {
+export type MenuItem = {
     title: string;
     desc: string;
     price: number;
@@ -79,7 +79,7 @@ export const menuData: Record<string, MenuItem[]> = {
             image: "/assets/burgers/beef.jpeg"
         },
         {
-            title: "BBQ Beef Burger",
+            title: "Butcher Beef",
             desc: "A BBQ beef burger with onion rings and BBQ sauce.",
             price: 7.99,
             image: "/assets/burgers/beef.jpeg"
@@ -138,7 +138,6 @@ export const menuData: Record<string, MenuItem[]> = {
     ]
 };
 
-
 export type ExtraItem = {
     title: string;
     desc?: string;
@@ -152,50 +151,37 @@ export const Extras: ExtraItem[] = [
         title: "French Fries",
         desc: "Crispy golden fries.",
         price: 2.99,
-        image: "/assets/extras/fries.jpeg"
+        image: "/assets/extras/1.png"
     },
-    {
-        title: "Onion Rings",
-        desc: "Crispy onion rings.",
-        price: 3.49,
-        image: "/assets/extras/onion-rings.jpeg"
-    },
-    {
-        title: "Mozzarella Sticks",
-        desc: "Fried mozzarella cheese sticks.",
-        price: 4.99,
-        image: "/assets/extras/mozzarella-sticks.jpeg"
-    },
-    {
-        title: "Garlic Bread",
-        desc: "Toasted garlic bread with butter.",
-        price: 2.49,
-        image: "/assets/extras/garlic-bread.jpeg"
-    }
-    ,
     {
         title: "Chicken Nuggets",
         desc: "Crispy chicken nuggets.",
         price: 4.49,
-        image: "/assets/extras/chicken-nuggets.jpeg"
-    },
-    {
-        title: "Side Salad",
-        desc: "Fresh garden salad.",
-        price: 3.99,
-        image: "/assets/extras/salad.jpeg"
-    },
-    {
-        title: "Coleslaw",
-        desc: "Creamy coleslaw.",
-        price: 2.99,
-        image: "/assets/extras/coleslaw.jpeg"
+        image: "/assets/extras/2.png"
     },
     {
         title: "Pepsi",
-        price: 249,
-        image: "/path/pepsi.png",
-        options: ["Pepsi - 500ml", "Pepsi - 1.5 Lit."]
+        price: 2.49,
+        image: "/assets/extras/3.png",
+        options: ["500ml", "1.5 Lit."]
+    },
+    {
+        title: "NextCola",
+        price: 2.49,
+        image: "/assets/extras/4.png",
+        options: ["500ml", "1.5 Lit."]
+    },
+    {
+        title: "7UP",
+        price: 2.49,
+        image: "/assets/extras/5.png",
+        options: ["500ml", "1.5 Lit."]
+    },
+    {
+        title: "Dips",
+        desc: "Choice of dips.",
+        price: 0.99,
+        image: "/assets/extras/6.png",
+        options: ["Garlic Mayo", "Spicy Mayo", "Honey Mustard", "BBQ Sauce", "Ranch", "Cheese Dip"]
     }
-
-]
+];

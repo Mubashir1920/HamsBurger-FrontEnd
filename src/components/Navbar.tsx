@@ -1,9 +1,8 @@
-"use client";
-
 import { useState } from "react";
 import { motion, useScroll, useMotionValueEvent } from "motion/react";
-import { HiOutlineMenuAlt3, HiOutlineShoppingBag } from "react-icons/hi";
+import { HiOutlineShoppingBag } from "react-icons/hi";
 import { Link } from "react-router";
+import MobileNav from "./MobileNav";
 
 const Navbar = () => {
     const { scrollY } = useScroll();
@@ -28,8 +27,10 @@ const Navbar = () => {
             <div className="max-w-screen-xl mx-auto flex items-center justify-between">
                 {/* Logo */}
                 <h1 className="text-2xl bg-black">
-                    <span className="leading-none px-1">HAMS</span>
-                    <span className="bg-theme-red px-1">BURGERS</span>
+                    <Link to='/' >
+                        <span className="leading-none px-1">HAMS</span>
+                        <span className="bg-theme-red px-1">BURGERS</span>
+                    </Link>
                 </h1>
 
                 {/* Nav Links */}
@@ -49,16 +50,16 @@ const Navbar = () => {
                 </ul>
 
                 {/* Button + Menu Icon */}
-                <div className="flex items-center space-x-4  text-sm">
-                    <button className="bg-red-800 uppercase cursor-pointer px-4 py-2 text-xl tracking-wide rounded-md transition">
-                        Order Online
-                    </button>
+                <div className="flex items-center gap-4  text-sm">
+                    <Link to="/orderonline">
+                        <button className="bg-red-800 hover:bg-yellow-700 transition-colors duration-300 uppercase cursor-pointer px-4 py-2 text-xl tracking-wide rounded-md ">
+                            Order Online
+                        </button>
+                    </Link>
                     <button className="text-xl cursor-pointer">
                         <HiOutlineShoppingBag size={28} />
                     </button>
-                    <button className="text-xl md:hidden" >
-                        <HiOutlineMenuAlt3 size={28} />
-                    </button>
+                    <MobileNav />
                 </div>
             </div>
         </motion.nav>

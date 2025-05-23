@@ -102,7 +102,7 @@ const ItemDetailsModal: React.FC<ItemDetailsModalProps> = ({
                         {/* Close Button */}
                         <button
                             onClick={onClose}
-                            className="absolute bg-black p-2 top-4 right-4 cursor-pointer text-white hover:text-red-500 transition"
+                            className="absolute bg-black p-2 top-4 right-4 cursor-pointer text-white hover:text-theme-red transition"
                         >
                             <IoMdClose size={30} />
                         </button>
@@ -111,12 +111,12 @@ const ItemDetailsModal: React.FC<ItemDetailsModalProps> = ({
                         <div className="flex flex-col md:flex-row">
                             {/* Left Image */}
                             <div className="w-full md:w-1/2 h-64 md:h-auto">
-                                <img src={image} alt={title} className="w-full h-full object-cover rounded-l-xl" />
+                                <img src={image} alt={title} className="w-full h-full object-cover " />
                             </div>
 
                             {/* Right Details */}
-                            <div className="w-full md:w-1/2 p-6">
-                                <h2 className="text-2xl font-bold uppercase">{title}</h2>
+                            <div className="w-full md:w-1/2 flex flex-col justify-start p-6 mt-5">
+                                <h2 className="text-4xl font-bebas uppercase">{title}</h2>
                                 <p className="mt-2 text-sm text-gray-300">{desc}</p>
                                 <p className="mt-4 text-xl text-yellow-400 font-semibold">
                                     Rs. {calculateTotalPrice()}/-
@@ -137,9 +137,9 @@ const ItemDetailsModal: React.FC<ItemDetailsModalProps> = ({
                                 </div>
 
                                 {/* Combo Option */}
-                                <div className="mt-4">
+                                <div className="mt-4 flex flex-col gap-2">
                                     <label className="font-semibold">Meal: </label>
-                                    <select className="ml-2 bg-black border border-gray-500 rounded text-sm px-2 py-1">
+                                    <select className=" bg-black border border-gray-500 rounded text-sm px-2 py-1">
                                         <option>{title} + (Fries & Drink) Combo</option>
                                         <option>{title}</option>
                                     </select>
@@ -149,7 +149,7 @@ const ItemDetailsModal: React.FC<ItemDetailsModalProps> = ({
                                 <div className="mt-6">
                                     <button
                                         onClick={handleAdd}
-                                        className="bg-theme-red hover:bg-yellow-700 text-white font-semibold uppercase px-5 py-2 rounded"
+                                        className="bg-theme-red  hover:bg-yellow-700 text-white font-semibold uppercase px-5 py-2 rounded"
                                     >
                                         Add to Cart
                                     </button>
@@ -158,16 +158,16 @@ const ItemDetailsModal: React.FC<ItemDetailsModalProps> = ({
                         </div>
 
                         {/* Extras Section */}
-                        <div className="p-6 pt-4">
-                            <h3 className="text-xl font-bold">
-                                Addons <span className="text-yellow-400">(Optional)</span>
+                        <div className="p-6 pt-10">
+                            <h3 className="text-xl font-semibold">
+                                Extras <span className="text-yellow-400">(Optional)</span>
                             </h3>
                             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4">
                                 {Extras.map((extra, index) => {
                                     return (
                                         <div
                                             key={index}
-                                            className={`bg-black border rounded p-3 hover:border-yellow-400 transition cursor-pointer flex items-center justify-between hover:bg-yellow-800/20 `}
+                                            className={`bg-black  p-3   flex items-center justify-between  `}
                                             onClick={() => toggleExtra(extra)}
                                         >
                                             <div className="flex items-center gap-3">
@@ -178,16 +178,18 @@ const ItemDetailsModal: React.FC<ItemDetailsModalProps> = ({
                                                 </div>
                                             </div>
                                             {extra.options && extra.options?.length > 0 ? (
-                                                <select className="bg-black border border-gray-600 text-sm px-1 py-1 rounded text-white">
-                                                    {extra.options.map((opt, i) => (
-                                                        <option key={i}>{opt}</option>
-                                                    ))}
-                                                </select>
-                                            ) : (
-                                                <button className="text-yellow-400 border border-yellow-400 hover:bg-yellow-400 hover:text-black px-2 py-1 rounded text-sm">
-                                                    +
-                                                </button>
-                                            )}
+                                                <>
+                                                    <select className="bg-black border border-gray-600 text-sm px-1 py-1 rounded text-white">
+                                                        {extra.options.map((opt, i) => (
+                                                            <option key={i}>{opt}</option>
+                                                        ))}
+                                                    </select>
+
+                                                </>
+                                            ) : null}
+                                            <button className="text-yellow-400 cursor-pointer transition-colors border border-yellow-400 hover:bg-yellow-400 hover:text-black px-2 py-1 rounded text-sm">
+                                                +
+                                            </button>
                                         </div>
                                     )
                                 })}

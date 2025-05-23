@@ -48,7 +48,7 @@ const HomeMenu: React.FC = () => {
                         transition={{ duration: 0.3 }}
                         className="flex flex-wrap justify-center gap-4 sm:gap-6 px-4"
                     >
-                        {menuData[activeTab]?.slice(0, 6).map((item, index) => (
+                        {menuData[activeTab]?.slice(0, 3).map((item, index) => (
                             <MenuCard key={index} {...item} onClick={() => handleCardClick(item)} />
                         ))}
                     </motion.div>
@@ -62,8 +62,8 @@ const HomeMenu: React.FC = () => {
                 </Link>
             </section>
 
-            {/* ✅ Modal OUTSIDE the section to prevent body scroll */}
-            {/* <AnimatePresence> */}
+
+            <AnimatePresence>
                 <ItemDetailsModal
                     isOpen={!!selectedItem}
                     onClose={handleCloseModal}
@@ -71,7 +71,7 @@ const HomeMenu: React.FC = () => {
                     {...selectedItem}
                     Extras={Extras}
                 />
-            {/* </AnimatePresence> */}
+            </AnimatePresence>
         </>
     )
 }
