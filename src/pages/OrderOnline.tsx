@@ -12,7 +12,7 @@ const OrderOnline: React.FC = () => {
     const [selectedItem, setSelectedItem] = useState<any | null>(null)
 
 
-    const items = menuData[activeTab];
+    // const items = menuData[activeTab];
 
     const handleCardClick = (item: any) => setSelectedItem(item)
     const handleCloseModal = () => setSelectedItem(null)
