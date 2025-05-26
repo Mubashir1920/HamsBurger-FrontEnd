@@ -58,12 +58,12 @@ const ItemDetailsModal: React.FC<ItemDetailsModalProps> = ({
     const isDeal = category === "Deals"
 
     // Check if item type should show selection dropdown
-    const shouldShowSelection = (dealItem: DealItem) => {
-        return (
-            !dealItem.isDefault &&
-            (dealItem.type === "burger" || dealItem.type === "pizza" || dealItem.type === "drink" || dealItem.type === "dip")
-        )
-    }
+    // const shouldShowSelection = (dealItem: DealItem) => {
+    //     return (
+    //         !dealItem.isDefault &&
+    //         (dealItem.type === "burger" || dealItem.type === "pizza" || dealItem.type === "drink" || dealItem.type === "dip")
+    //     )
+    // }
 
     // Check if item should show flavor selection
     const shouldShowFlavorSelection = (dealItem: DealItem) => {
