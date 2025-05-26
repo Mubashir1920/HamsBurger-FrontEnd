@@ -10,10 +10,10 @@ interface FormData {
     botAnswer: string;
 }
 
-interface BotQuestion {
-    question: string;
-    answer: string;
-}
+// interface BotQuestion {
+//     question: string;
+//     answer: string;
+// }
 
 interface FormErrors {
     name?: string;
@@ -34,17 +34,17 @@ export default function Reservation() {
         botAnswer: '',
     });
 
-    const [botQuestion, setBotQuestion] = useState<BotQuestion>(generateBotQuestion());
+    // const [botQuestion, setBotQuestion] = useState<BotQuestion>(generateBotQuestion());
     const [errors, setErrors] = useState<FormErrors>({});
 
-    function generateBotQuestion(): BotQuestion {
-        const a = Math.floor(Math.random() * 10) + 1;
-        const b = Math.floor(Math.random() * 10) + 1;
-        return {
-            question: `${a} + ${b}`,
-            answer: (a + b).toString(),
-        };
-    }
+    // function generateBotQuestion(): BotQuestion {
+    //     const a = Math.floor(Math.random() * 10) + 1;
+    //     const b = Math.floor(Math.random() * 10) + 1;
+    //     return {
+    //         question: `${a} + ${b}`,
+    //         answer: (a + b).toString(),
+    //     };
+    // }
 
     function handleChange(e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
         const { name, value } = e.target;
@@ -57,9 +57,9 @@ export default function Reservation() {
         if (!form.phone) newErrors.phone = 'Phone is required';
         if (!form.date) newErrors.date = 'Date is required';
         if (!form.time) newErrors.time = 'Time is required';
-        if (!form.botAnswer || form.botAnswer !== botQuestion.answer) {
-            newErrors.botAnswer = 'Bot verification failed';
-        }
+        // if (!form.botAnswer || form.botAnswer !== botQuestion.answer) {
+        //     newErrors.botAnswer = 'Bot verification failed';
+        // }
         return newErrors;
     }
 
@@ -139,7 +139,7 @@ export default function Reservation() {
                     ></textarea>
 
                     {/* Bot Verification */}
-                    <div className="flex flex-col sm:flex-row items-center gap-4">
+                    {/* <div className="flex flex-col sm:flex-row items-center gap-4">
                         <span className="text-sm">{`What is ${botQuestion.question}?`}</span>
                         <input
                             type="text"
@@ -149,7 +149,7 @@ export default function Reservation() {
                             onChange={handleChange}
                             className="w-full sm:w-auto px-4 py-2 rounded bg-[#1d1d1d] border border-gray-700 focus:outline-none"
                         />
-                    </div>
+                    </div> */}
 
                     {/* Errors */}
                     <div className="text-theme-red text-sm space-y-1">
