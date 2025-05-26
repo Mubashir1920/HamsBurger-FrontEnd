@@ -28,7 +28,7 @@ const MenuCard: React.FC<MenuCardProps> = ({ image, title, desc, price, onClick 
         <h3 className="text-white text-xl sm:text-2xl md:text-3xl tracking-wide font-medium uppercase">
           {title}
         </h3>
-        <p className="text-gray-400 text-sm sm:text-base capitalize font-poppin leading-snug">
+      <p className="text-gray-200 text-sm sm:text-base capitalize font-poppin leading-snug">
           {desc}
         </p>
         <span className="text-yellow-400 text-xl font-semibold mt-1 tracking-tight font-poppin">${price}/-</span>

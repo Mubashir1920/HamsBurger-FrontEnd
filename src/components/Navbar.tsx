@@ -51,7 +51,7 @@ const Navbar = () => {
 
                 {/* Button + Menu Icon */}
                 <div className="flex items-center gap-4  text-sm">
-                    <Link to="/orderonline">
+                    <Link to="/orderonline" className="hidden md:block" >
                         <button className="bg-red-800 hover:bg-yellow-700 transition-colors duration-300 uppercase cursor-pointer px-4 py-2 text-xl tracking-wide rounded-md ">
                             Order Online
                         </button>

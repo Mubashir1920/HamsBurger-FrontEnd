@@ -1,4 +1,4 @@
-'use client'
+
 
 import { useEffect, useRef, useState } from "react"
 import { IoCloseOutline } from "react-icons/io5";
@@ -25,6 +25,8 @@ const MobileNav = () => {
     const sideNavRef = useRef<HTMLDivElement>(null);
     const [active, setActive] = useState(false);
     const lenis = useLenis();
+    const pathname = window.location.pathname;
+
 
     useEffect(() => {
         if (active) {
@@ -89,7 +91,7 @@ const MobileNav = () => {
                                     onClick={() => setActive(false)}
                                     to={item.path}
                                 >
-                                    <LuArrowUpRight className="inline-block opacity-0 group-hover:opacity-100 transition-all -ml-6 group-hover:ml-0 duration-300" />
+                                    <LuArrowUpRight className={`${pathname == item.path ? 'opacity-100 ml-0 ' : ''} inline-block opacity-0 group-hover:opacity-100 transition-all -ml-6 group-hover:ml-0 duration-300`} />
                                     {item.name}
                                 </Link>
                             </li>
