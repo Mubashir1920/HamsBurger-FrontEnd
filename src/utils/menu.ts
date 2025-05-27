@@ -5,6 +5,13 @@ export type MenuItem = {
     image: string
     isNew?: boolean
     dealItems?: DealItem[] // Add dealItems for deals
+    sizes?: PizzaSize[] // Add sizes for pizzas
+}
+
+export type PizzaSize = {
+    name: string
+    price: number
+    description?: string
 }
 
 export type DealItem = {
@@ -105,45 +112,80 @@ export const menuData: Record<string, MenuItem[]> = {
         {
             title: "Margherita Pizza",
             desc: "A classic Margherita pizza with fresh basil and mozzarella.",
-            price: 8.99,
+            price: 8.99, // Small size base price
             image: "/assets/pizza/pizza1.jpeg",
             isNew: true,
+            sizes: [
+                { name: "Small", price: 8.99, description: "8 inch" },
+                { name: "Medium", price: 12.99, description: "12 inch" },
+                { name: "Large", price: 16.99, description: "16 inch" },
+            ],
         },
         {
             title: "Pepperoni Pizza",
             desc: "A pepperoni pizza with spicy pepperoni and mozzarella cheese.",
             price: 9.49,
             image: "/assets/pizza/pizza4.jpeg",
+            sizes: [
+                { name: "Small", price: 9.49, description: "8 inch" },
+                { name: "Medium", price: 13.49, description: "12 inch" },
+                { name: "Large", price: 17.49, description: "16 inch" },
+            ],
         },
         {
             title: "BBQ Chicken Pizza",
             desc: "A BBQ chicken pizza with grilled chicken and BBQ sauce.",
             price: 10.99,
             image: "/assets/pizza/pizza1.jpeg",
+            sizes: [
+                { name: "Small", price: 10.99, description: "8 inch" },
+                { name: "Medium", price: 14.99, description: "12 inch" },
+                { name: "Large", price: 18.99, description: "16 inch" },
+            ],
         },
         {
             title: "Veggie Pizza",
             desc: "A veggie pizza with bell peppers, onions, and olives.",
             price: 9.99,
             image: "/assets/pizza/pizza4.jpeg",
+            sizes: [
+                { name: "Small", price: 9.99, description: "8 inch" },
+                { name: "Medium", price: 13.99, description: "12 inch" },
+                { name: "Large", price: 17.99, description: "16 inch" },
+            ],
         },
         {
             title: "Hawaiian Pizza",
             desc: "A Hawaiian pizza with ham and pineapple.",
             price: 10.49,
             image: "/assets/pizza/pizza2.jpeg",
+            sizes: [
+                { name: "Small", price: 10.49, description: "8 inch" },
+                { name: "Medium", price: 14.49, description: "12 inch" },
+                { name: "Large", price: 18.49, description: "16 inch" },
+            ],
         },
         {
             title: "Meat Lovers Pizza",
             desc: "A meat lovers pizza with pepperoni, sausage, and bacon.",
             price: 11.49,
             image: "/assets/pizza/pizza3.jpeg",
+            sizes: [
+                { name: "Small", price: 11.49, description: "8 inch" },
+                { name: "Medium", price: 15.49, description: "12 inch" },
+                { name: "Large", price: 19.49, description: "16 inch" },
+            ],
         },
         {
             title: "Buffalo Chicken Pizza",
             desc: "A buffalo chicken pizza with spicy buffalo sauce and blue cheese.",
             price: 10.99,
             image: "/assets/pizza/pizza1.jpeg",
+            sizes: [
+                { name: "Small", price: 10.99, description: "8 inch" },
+                { name: "Medium", price: 14.99, description: "12 inch" },
+                { name: "Large", price: 18.99, description: "16 inch" },
+            ],
         },
     ],
     Deals: [
@@ -151,7 +193,7 @@ export const menuData: Record<string, MenuItem[]> = {
             title: "Classic Combo Meal",
             desc: "1 Chicken Burger, Crispy Fries & 500ml Drink – a perfect all-in-one meal.",
             price: 9.49,
-            image: "/assets/deals/deal2.jpg",
+            image: "/assets/deals/deal1.jpeg",
             isNew: true,
             dealItems: [
                 { type: "burger", quantity: 1, isDefault: false, burgerType: "chicken" },
@@ -163,7 +205,7 @@ export const menuData: Record<string, MenuItem[]> = {
             title: "Family Feast Box",
             desc: "2 Large Pizzas, 10 Nuggets, 2 Fries & 1.5L Drink – enough for the whole family.",
             price: 27.99,
-            image: "/assets/deals/deal3.webp",
+            image: "/assets/deals/deal2.jpeg",
             dealItems: [
                 { type: "pizza", quantity: 2, size: "Large", isDefault: false },
                 { type: "nuggets", quantity: 10, isDefault: true, defaultItem: "Chicken Nuggets" },
@@ -175,7 +217,7 @@ export const menuData: Record<string, MenuItem[]> = {
             title: "Double Trouble Burger Deal",
             desc: "2 Beef Burgers, 2 Fries, 2 Drinks – made for sharing or serious hunger.",
             price: 18.99,
-            image: "/assets/deals/deal1.avif",
+            image: "/assets/deals/deal3.jpeg",
             dealItems: [
                 { type: "burger", quantity: 2, isDefault: false, burgerType: "beef" },
                 { type: "fries", quantity: 2, isDefault: true, defaultItem: "French Fries" },
@@ -186,7 +228,7 @@ export const menuData: Record<string, MenuItem[]> = {
             title: "Spicy Lover's Pack",
             desc: "Spicy Chicken Burger, Jalapeño Fries, Spicy Mayo Dip & 500ml Drink.",
             price: 11.49,
-            image: "/assets/deals/deal2.jpg",
+            image: "/assets/deals/deal4.jpeg",
             dealItems: [
                 { type: "burger", quantity: 1, isDefault: false, burgerType: "chicken" },
                 { type: "fries", quantity: 1, isDefault: true, defaultItem: "Jalapeño Fries" },
@@ -198,7 +240,7 @@ export const menuData: Record<string, MenuItem[]> = {
             title: "Pizza Party Deal",
             desc: "1 Medium Pepperoni Pizza, 6 Wings & Garlic Dip – ideal for movie night.",
             price: 15.99,
-            image: "/assets/deals/deal3.webp",
+            image: "/assets/deals/deal5.jpeg",
             dealItems: [
                 { type: "pizza", quantity: 1, size: "Medium", isDefault: false },
                 { type: "wings", quantity: 6, isDefault: true, defaultItem: "Chicken Wings" },
@@ -209,7 +251,7 @@ export const menuData: Record<string, MenuItem[]> = {
             title: "Snack Attack Box",
             desc: "6 Nuggets, Small Fries, Dips Sampler & 500ml Drink – perfect for a quick bite.",
             price: 8.49,
-            image: "/assets/deals/deal1.avif",
+            image: "/assets/deals/deal6.jpeg",
             dealItems: [
                 { type: "nuggets", quantity: 6, isDefault: true, defaultItem: "Chicken Nuggets" },
                 { type: "fries", quantity: 1, size: "Small", isDefault: true, defaultItem: "French Fries" },

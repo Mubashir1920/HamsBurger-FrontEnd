@@ -57,9 +57,8 @@ const MobileNav = () => {
     return (
         <>
             {/* Toggle Button */}
-            <button className="text-xl z-30 cursor-pointer md:hidden">
+            <button className="text-xl  cursor-pointer md:hidden">
                 <HiOutlineMenuAlt3 onClick={() => setActive(true)} className={`${active ? 'hidden' : 'block'}`} size={28} />
-                <IoCloseOutline onClick={() => setActive(false)} className={`${active ? 'block' : 'hidden'}`} size={35} />
             </button>
 
             {/* Background Overlay */}
@@ -73,15 +72,17 @@ const MobileNav = () => {
             {/* Side Nav */}
             <div
                 ref={sideNavRef}
-                className={`fixed   top-0  right-0 h-[100dvh]  bg-black text-white text-3xl  transition-transform duration-500 ease-in-out   w-[80vw] sm:w-[50vw] px-10 z-20 ${active ? 'translate-x-0' : 'translate-x-full'}`}
+                className={`fixed   top-0  right-0 h-[100dvh]  bg-black text-white text-3xl  transition-transform duration-500 ease-in-out   w-[80vw] sm:w-[50vw] px-10 z-20  ${active ? 'translate-x-0' : 'translate-x-full'}`}
             >
-                <div className='relative  h-full flex flex-col pt-30 '>
+
+                <div className='relative  h-full flex flex-col  pt-30 '>
                     <Link to="/" onClick={() => setActive(false)} className="cursor-pointer">
                         <h1 className=" bg-black " >
                             <span className="leading-none px-1">HAMS</span>
                             <span className="bg-theme-red px-1">BURGERS</span>
                         </h1>
                     </Link>
+                    <IoCloseOutline onClick={() => setActive(false)} className={` absolute right-5 cursor-pointer top-10 ${active ? 'block' : 'hidden'}`} size={35} />
 
 
                     <ul className="flex flex-col gap-5  mt-20">

@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { motion, useScroll, useMotionValueEvent } from "motion/react";
-import { HiOutlineShoppingBag } from "react-icons/hi";
 import { Link } from "react-router";
 import MobileNav from "./MobileNav";
+import CartSideBar from "./CartSideBar";
 
 const Navbar = () => {
     const { scrollY } = useScroll();
@@ -56,9 +56,10 @@ const Navbar = () => {
                             Order Online
                         </button>
                     </Link>
-                    <button className="text-xl cursor-pointer">
+                    {/* <button className="text-xl cursor-pointer">
                         <HiOutlineShoppingBag size={28} />
-                    </button>
+                    </button> */}
+                    <CartSideBar />
                     <MobileNav />
                 </div>
             </div>
