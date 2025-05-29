@@ -16,7 +16,7 @@ const Menu: React.FC = () => {
                 <h2 className="text-4xl md:text-6xl font-bebas uppercase">
                     Delicious Tasty Dishes
                 </h2>
-                <div className="flex justify-center border-y md:mx-20 py-3 font-bebas mt-10 space-x-4 text-2xl uppercase tracking-wide">
+                <div className="flex flex-wrap justify-center border-y md:mx-20 py-3 font-bebas mt-10 gap-4 overflow-hidden text-2xl uppercase tracking-wide">
                     {tabs.map((tab) => (
                         <button
                             key={tab}

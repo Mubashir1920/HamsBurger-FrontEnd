@@ -60,9 +60,9 @@ export function CartItem({
                         {/* Remove button */}
                         <button
                             onClick={() => onRemove(id)}
-                            className="text-red-800 hover:text-red-900 p-1 h-auto ml-2"
+                            className="text-red-800 hover:text-yellow-700 transition-colors duration-300 p-1 h-auto ml-2"
                         >
-                            <MdDelete className={"h-5 w-5"} />
+                            <MdDelete className={"cursor-pointer  h-5 w-5"} />
                             <span className="sr-only">Remove item</span>
                         </button>
                     </div>
@@ -74,12 +74,12 @@ export function CartItem({
                 {/* Quantity Controls */}
                 <div className="flex items-center  space-x-3">
                     <span className={` ${compact ? "text-[16px] " : "text-base"}`}>Qty:</span>
-                    <div className="flex items-center px-3">
+                    <div className="flex items-center gap-5 px-3">
                         <button
                             onClick={() => onDecrease(id)}
                             disabled={quantity <= 1}
                         >
-                            <FiMinus size={compact ? 16 : 25} />
+                            <FiMinus className="cursor-pointer" size={compact ? 18 : 25} />
                             <span className="sr-only">Decrease quantity</span>
                         </button>
 
@@ -90,7 +90,7 @@ export function CartItem({
                         <button
                             onClick={() => onIncrease(id)}
                         >
-                            <FiPlus size={compact ? 16 : 25} />
+                            <FiPlus className="cursor-pointer" size={compact ? 18 : 25} />
                             <span className="sr-only">Increase quantity</span>
                         </button>
                     </div>

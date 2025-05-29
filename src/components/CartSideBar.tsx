@@ -121,6 +121,8 @@ const CartSideBar = () => {
             <div
                 ref={sideNavRef}
                 className={`fixed   top-0  right-0 h-[100dvh]  bg-black text-white text-3xl  transition-transform duration-500 ease-in-out   w-[80vw] sm:w-[50vw] lg:w-[35vw]  px-5 z-20 ${active ? 'translate-x-0' : 'translate-x-full'}`}
+                data-lenis-prevent
+
             >
                 <div className="flex flex-col h-full pt-10 pb-5">
                     {/* Header */}
@@ -149,9 +151,34 @@ const CartSideBar = () => {
                             ))}
                         </ul>
                     </div>
+                    {cartItems.length > 0 && (
+                        <div className="text-white">
+                            <div className="space-y-2 text-[20px]  mb-4">
+                                <div className="flex justify-between">
+                                    <span>Subtotal</span>
+                                    {/* <span>${subtotal.toFixed(2)}</span> */}
+                                    <span>$304</span>
+                                </div>
+                                <div className="flex justify-between">
+                                    <span>Delivery Fee</span>
+                                    <span>$3.99</span>
+                                </div>
+                            </div>
+                            <div className="flex justify-between items-center mb-4 pt-2 border-t">
+                                <span className="text-lg ">Total:</span>
+                                {/* <span className="text-lg font-bold text-red-800">${(subtotal + 3.99).toFixed(2)}</span> */}
+                                <span className="text-lg font-bold text-red-800">$307</span>
+                            </div>
+                            <Link to="/checkout" className="w-full text-[26px] " onClick={() => setActive(false)}>
+                                <button className="hover:bg-red-800 bg-yellow-700 w-full transition-colors duration-300 uppercase cursor-pointer px-4 py-1 tracking-wide">
+                                    CHECKOUT
+                                </button>
+                            </Link>
+                        </div>
+                    )}
 
                     {/* Footer Buttons */}
-                    <div className="flex flex-col gap-2">
+                    {/* <div className="flex flex-col text-[26px] gap-2">
                         <Link to="/cart" className="w-full" onClick={() => setActive(false)}>
                             <button className="bg-red-800 hover:bg-yellow-700 w-full transition-colors duration-300 uppercase cursor-pointer px-4 py-1 tracking-wide">
                                 VIEW CART
@@ -162,7 +189,7 @@ const CartSideBar = () => {
                                 CHECKOUT
                             </button>
                         </Link>
-                    </div>
+                    </div> */}
                 </div>
             </div >
         </>

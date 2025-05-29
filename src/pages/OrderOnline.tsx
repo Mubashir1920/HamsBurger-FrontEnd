@@ -33,7 +33,7 @@ const OrderOnline: React.FC = () => {
         <section className="text-white max-w-6xl mx-auto flex flex-col justify-center py-16 px-4">
             <div className="text-left mb-10">
                 <h2 className="text-4xl md:text-6xl font-bebas uppercase">ORDER ONLINE</h2>
-                <div className="flex md:justify-start justify-center border-y py-3 font-bebas mt-10 space-x-4 text-2xl uppercase tracking-wide">
+                <div className="flex flex-wrap md:justify-start justify-center border-y py-3 font-bebas mt-10 space-x-4 text-2xl uppercase tracking-wide">
                     {tabs.map((tab) => (
                         <button
                             key={tab}

@@ -12,6 +12,7 @@ import OrderOnline from "./pages/OrderOnline";
 
 
 import { Routes, Route } from "react-router";
+import Page404 from "./pages/404";
 
 
 
@@ -28,6 +29,7 @@ function App() {
           <Route path="/orderonline" element={<OrderOnline />} />
           <Route path="/aboutus" element={<About />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/*" element={<Page404 />} />
         </Routes>
         <Footer />
       </ReactLenis>
