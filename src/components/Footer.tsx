@@ -5,7 +5,7 @@ import FooterBg from '/assets/footer_bg.png';
 export default function Footer() {
     return (
         <footer style={{ background: `url(${FooterBg})`, backgroundAttachment: 'fixed' }} className="   text-white relative overflow-hidden px-6 py-12 md:px-16 lg:px-24">
-            <div className='bg-black/80 z-[1] absolute top-0 left-0 w-full h-full' ></div>
+            <div className='bg-black/90 z-[1] absolute top-0 left-0 w-full h-full' ></div>
             <div className='z-[5] relative ' >
 
                 {/* Top Section */}

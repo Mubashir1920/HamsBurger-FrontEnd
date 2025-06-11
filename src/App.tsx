@@ -13,6 +13,7 @@ import OrderOnline from "./pages/OrderOnline";
 
 import { Routes, Route } from "react-router";
 import Page404 from "./pages/404";
+import ScrollToTop from "./components/ScrollToTop";
 
 
 
@@ -21,12 +22,13 @@ function App() {
   return (
     <>
       <ReactLenis root options={{ smoothWheel: true, touchMultiplier: 1 }}>
+        <ScrollToTop />
         <Navbar />
         <div className="pt-20" ></div>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/menu" element={<Menu />} />
-          <Route path="/orderonline" element={<OrderOnline />} />
+          <Route path="/menu" element={<OrderOnline />} />
+          {/* <Route path="/orderonline" element={<OrderOnline />} /> */}
           <Route path="/aboutus" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/*" element={<Page404 />} />

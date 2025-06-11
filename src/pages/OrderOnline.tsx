@@ -32,8 +32,11 @@ const OrderOnline: React.FC = () => {
     return (
         <section className="text-white max-w-6xl mx-auto flex flex-col justify-center py-16 px-4">
             <div className="text-left mb-10">
-                <h2 className="text-4xl md:text-6xl font-bebas uppercase">ORDER ONLINE</h2>
-                <div className="flex flex-wrap md:justify-start justify-center border-y py-3 font-bebas mt-10 space-x-4 text-2xl uppercase tracking-wide">
+                <h2 className="text-4xl md:text-6xl font-bebas uppercase">ORDER ONLINE OR TAKEAWAY</h2>
+                <p>
+                    Our Delicious Food Filled With Yummy taste and Love at Your Doorsteps. Order Now
+                </p>
+                <div className="flex flex-wrap gap-4 justify-start md:justify-center border-y py-3 font-bebas mt-10  text-2xl uppercase tracking-wide">
                     {tabs.map((tab) => (
                         <button
                             key={tab}

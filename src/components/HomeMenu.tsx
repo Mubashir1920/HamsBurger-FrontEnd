@@ -26,10 +26,10 @@ const HomeMenu: React.FC = () => {
                 <p className="text-red-500 italic mb-2 text-lg">Our menu</p>
                 <h2 className="text-white text-6xl font-bebas font-medium mb-6">THE HOT ITEMS</h2>
 
-                <div className="flex  flex-wrap justify-center mb-5 border-y md:mx-20 py-3 font-bebas mt-10 gap-4 text-2xl uppercase tracking-wide">
-                    {tabs.map((tab) => (
+                <div className="flex  flex-wrap justify-start md:justify-center mb-5 border-y md:mx-20 py-3 font-bebas mt-10 gap-4 text-2xl uppercase tracking-wide">
+                    {tabs.map((tab, index) => (
                         <button
-                            key={tab}
+                            key={index}
                             onClick={() => setActiveTab(tab)}
                             className={`px-2 pb-1 border-b-2 cursor-pointer transition-all capitalize duration-300 ${activeTab === tab
                                 ? "border-red-500 text-red-500"

@@ -3,6 +3,7 @@ import { FaFacebookF, FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa';
 import Slide1 from '/assets/slide1.png';
 import Slide2 from '/assets/slide2.png';
 import Slide3 from '/assets/slide3.png';
+import { Link } from 'react-router';
 
 type Slide = {
     id: number;
@@ -12,29 +13,31 @@ type Slide = {
     description: string;
 };
 
+
 const slides: Slide[] = [
     {
         id: 1,
         bg: Slide1,
-        subtitle: 'Best Burgers In The Town',
-        title: 'BEST TASTE OF BEEF BURGERS',
-        description: 'A restaurant with Timeless & Traditional taste',
+        subtitle: 'Beef Burger Lovers',
+        title: 'PREMIUM BEEF, PERFECTLY GRILLED',
+        description: 'Satisfy your cravings with our juicy, handcrafted beef burgers.',
     },
     {
         id: 2,
         bg: Slide2,
-        subtitle: 'Classic Burger Vibes',
-        title: 'FINEST CUTS & SMOKY FLAVOR',
-        description: 'Where tradition meets unforgettable flavor.',
+        subtitle: 'Crispy Chicken Delight',
+        title: 'IRRESISTIBLE CHICKEN BURGERS',
+        description: 'Enjoy golden crispy chicken with bold spices in every bite.',
     },
     {
         id: 3,
         bg: Slide3,
-        subtitle: 'Savor the Flavor',
-        title: 'EXPERIENCE THE ART OF GRILLING',
-        description: 'Indulge in our signature Dishes crafted with passion.',
+        subtitle: 'Pizza Perfection',
+        title: 'FIRE-BAKED GOURMET PIZZAS',
+        description: 'Loaded with toppings, baked to cheesy, crispy perfection.',
     },
 ];
+
 
 const HeroSlider: React.FC = () => {
     const [current, setCurrent] = useState<number>(0);
@@ -55,7 +58,7 @@ const HeroSlider: React.FC = () => {
             {/* Social Media */}
             <div className="absolute -left-40 top-1/2  -rotate-90  font-semibold flex  gap-2 text-sm  z-20">
                 <div className="flex items-center gap-2">
-                    <FaFacebookF /> Facebook 
+                    <FaFacebookF /> Facebook
                 </div>
                 <div className="flex items-center gap-2">
                     <FaInstagram /> Instagram
@@ -89,14 +92,14 @@ const HeroSlider: React.FC = () => {
                             className="w-full h-full object-cover"
                         />
 
-                        <div className="absolute inset-0 bg-black/70  flex items-center justify-center text-white text-center px-4">
+                        <div className="absolute inset-0 bg-black/50  flex items-center justify-center text-white text-center px-4">
                             <div>
                                 <p className="text-md italic mb-3">{slide.subtitle}</p>
                                 <h1 className="text-4xl tracking-wider font-bebas sm:text-6xl font-bold mb-4">{slide.title}</h1>
-                                <p className="text-base italic capitalize sm:text-lg mb-6">{slide.description}</p>
-                                <button className="bg-red-800  transition px-6 py-2 font-bold text-white rounded">
+                                <p className="text-base  capitalize sm:text-lg mb-6">{slide.description}</p>
+                                <Link to='/menu' className="bg-white text-black hover:bg-black duration-300 hover:text-white transition-colors px-6 py-2 font-bold  rounded-md">
                                     VIEW OUR FULL MENU
-                                </button>
+                                </Link>
                             </div>
                         </div>
                     </div>

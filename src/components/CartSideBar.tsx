@@ -13,7 +13,6 @@ type MenuItem = {
     path: string;
 };
 
-
 const menuItems: MenuItem[] = [
     { name: 'Home', path: '/' },
     { name: 'Menu', path: '/menu' },
@@ -45,16 +44,8 @@ const CartSideBar = () => {
             variant: "Black",
         },
         {
-            id: "2",
+            id: "3",
             name: "Beef Peopone Pizza",
-            price: 89.99,
-            quantity: 1,
-            image: "/assets/burgers/beef.jpeg",
-            variant: "Black",
-        },
-        {
-            id: "2",
-            name: "Wireless Bluetooth Headphones",
             price: 89.99,
             quantity: 1,
             image: "/assets/burgers/beef.jpeg",
@@ -93,20 +84,34 @@ const CartSideBar = () => {
                 setActive(false);
             }
         };
+
+        const handleEsc = (event: any) => {
+            if (event.key == 'Escape') {
+                setActive(false)
+            }
+        }
+
         if (active) {
             document.addEventListener('mousedown', handleClickOutside);
+            document.addEventListener('keyup', handleEsc)
         }
+
 
         return () => {
             document.removeEventListener('mousedown', handleClickOutside);
+            document.removeEventListener('keyup', handleEsc)
         };
+
+
+
+
     }, [active]);
 
     return (
         <>
             {/* Toggle Button */}
             <button className="text-xl cursor-pointer ">
-                <HiOutlineShoppingBag onClick={() => setActive(true)} className={`${active ? 'hidden' : 'block'}`} size={28} />
+                <HiOutlineShoppingBag onClick={() => setActive(true)} className={` ${active ? 'hidden' : 'block'}`} size={28} />
             </button>
 
             {/* Background Overlay */}
@@ -165,9 +170,9 @@ const CartSideBar = () => {
                                 </div>
                             </div>
                             <div className="flex justify-between items-center mb-4 pt-2 border-t">
-                                <span className="text-lg ">Total:</span>
+                                <span className="text-2xl ">Total:</span>
                                 {/* <span className="text-lg font-bold text-red-800">${(subtotal + 3.99).toFixed(2)}</span> */}
-                                <span className="text-lg font-bold text-red-800">$307</span>
+                                <span className="text-2xl ">$307</span>
                             </div>
                             <Link to="/checkout" className="w-full text-[26px] " onClick={() => setActive(false)}>
                                 <button className="hover:bg-red-800 bg-yellow-700 w-full transition-colors duration-300 uppercase cursor-pointer px-4 py-1 tracking-wide">
@@ -176,20 +181,6 @@ const CartSideBar = () => {
                             </Link>
                         </div>
                     )}
-
-                    {/* Footer Buttons */}
-                    {/* <div className="flex flex-col text-[26px] gap-2">
-                        <Link to="/cart" className="w-full" onClick={() => setActive(false)}>
-                            <button className="bg-red-800 hover:bg-yellow-700 w-full transition-colors duration-300 uppercase cursor-pointer px-4 py-1 tracking-wide">
-                                VIEW CART
-                            </button>
-                        </Link>
-                        <Link to="/checkout" className="w-full" onClick={() => setActive(false)}>
-                            <button className="hover:bg-red-800 bg-yellow-700 w-full transition-colors duration-300 uppercase cursor-pointer px-4 py-1 tracking-wide">
-                                CHECKOUT
-                            </button>
-                        </Link>
-                    </div> */}
                 </div>
             </div >
         </>

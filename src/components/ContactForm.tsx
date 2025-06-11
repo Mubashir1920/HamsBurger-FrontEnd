@@ -64,7 +64,7 @@ const ContactForm = () => {
                     value={formData.name}
                     onChange={handleChange}
                     placeholder="Your Name"
-                    className="w-full p-3 bg-zinc-800 text-white border border-zinc-700 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
+                    className="w-full p-3 bg-black/30 text-white border border-zinc-700 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
                 />
                 {errors.name && <p className="text-red-400 text-sm mt-1">{errors.name}</p>}
             </div>
@@ -75,7 +75,7 @@ const ContactForm = () => {
                     value={formData.email}
                     onChange={handleChange}
                     placeholder="Email"
-                    className="w-full p-3 bg-zinc-800 text-white border border-zinc-700 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
+                    className="w-full p-3 bg-black/30 text-white border border-zinc-700 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
                 />
                 {errors.email && <p className="text-red-400 text-sm mt-1">{errors.email}</p>}
             </div>
@@ -86,7 +86,7 @@ const ContactForm = () => {
                     value={formData.phone}
                     onChange={handleChange}
                     placeholder="Phone Number"
-                    className="w-full p-3 bg-zinc-800 text-white border border-zinc-700 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
+                    className="w-full p-3 bg-black/30 text-white border border-zinc-700 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
                 />
                 {errors.phone && <p className="text-red-400 text-sm mt-1">{errors.phone}</p>}
             </div>
@@ -98,7 +98,7 @@ const ContactForm = () => {
                     onChange={handleChange}
                     placeholder="Message"
                     rows={5}
-                    className="w-full p-3 bg-zinc-800 text-white border border-zinc-700 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
+                    className="w-full p-3 bg-black/30 text-white border border-zinc-700 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
                 ></textarea>
                 {errors.message && <p className="text-red-400 text-sm mt-1">{errors.message}</p>}
             </div>
