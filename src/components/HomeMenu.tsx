@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 
 import ItemDetailsModal from './ItemDetailsModal'
 import MenuCard from './MenuCard'
-import { menuData, Extras } from '../utils/menu'
+import { menuData } from '../utils/menu'
 
 const tabs: string[] = menuData ? Object.keys(menuData) : []
 
@@ -14,10 +14,8 @@ const HomeMenu: React.FC = () => {
 
     const handleCardClick = (item: any) => setSelectedItem(item)
     const handleCloseModal = () => setSelectedItem(null)
-    const handleAddToCart = () => {
-        alert('Item added to cart!')
-        setSelectedItem(null)
-    }
+
+    console.log(selectedItem);
 
 
     return (
@@ -26,22 +24,19 @@ const HomeMenu: React.FC = () => {
                 <p className="text-red-500 italic mb-2 text-lg">Our menu</p>
                 <h2 className="text-white text-6xl font-bebas font-medium mb-6">THE HOT ITEMS</h2>
 
-                <div className="flex  flex-wrap justify-start md:justify-center mb-5 border-y md:mx-20 py-3 font-bebas mt-10 gap-4 text-2xl uppercase tracking-wide">
-                    {tabs.map((tab, index) => (
+                <div className="flex flex-wrap text-xl max-w-fit mx-auto sticky top-20 z-[10] bg-black/70 backdrop-blur-lg mb-10 gap-4 justify-center  md:px-10 px-4  rounded-lg py-5 font-bebas mt-10  sm:text-2xl uppercase tracking-wide">
+                    {tabs.map((tab) => (
                         <button
-                            key={index}
+                            key={tab}
                             onClick={() => setActiveTab(tab)}
-                            className={`px-2 pb-1 border-b-2 cursor-pointer transition-all capitalize duration-300 ${activeTab === tab
-                                ? "border-red-500 text-red-500"
-                                : "border-transparent hover:text-red-500"
+                            className={`px-2 pb-1 border-b-2 cursor-pointer transition-all capitalize duration-300 ${activeTab === tab ? "border-red-500 text-red-500" : "border-transparent hover:text-red-500"
                                 }`}
                         >
-                            {tab}
+                            {tab === "ChickenBurger" ? "Chicken Burger" : tab === "BeefBurger" ? "Beef Burger" : tab}
                         </button>
                     ))}
                 </div>
-
-                <AnimatePresence mode="wait">
+                <AnimatePresence mode="popLayout">
                     <motion.div
                         key={activeTab}
                         initial={{ opacity: 0, y: 10 }}
@@ -67,11 +62,10 @@ const HomeMenu: React.FC = () => {
 
             <AnimatePresence>
                 <ItemDetailsModal
+                    category={activeTab}
                     isOpen={!!selectedItem}
                     onClose={handleCloseModal}
-                    onAddToCart={handleAddToCart}
                     {...selectedItem}
-                    Extras={Extras}
                 />
             </AnimatePresence>
         </>

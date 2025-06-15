@@ -30,13 +30,14 @@ const OrderOnline: React.FC = () => {
     }
 
     return (
-        <section className="text-white max-w-6xl mx-auto flex flex-col justify-center py-16 px-4">
-            <div className="text-left mb-10">
-                <h2 className="text-4xl md:text-6xl font-bebas uppercase">ORDER ONLINE OR TAKEAWAY</h2>
-                <p>
-                    Our Delicious Food Filled With Yummy taste and Love at Your Doorsteps. Order Now
-                </p>
-                <div className="flex flex-wrap gap-4 justify-start md:justify-center border-y py-3 font-bebas mt-10  text-2xl uppercase tracking-wide">
+        <section className=" container mx-auto  justify-center py-16 px-4">
+            <h2 className="text-4xl md:text-6xl font-bebas uppercase">ORDER ONLINE OR TAKEAWAY</h2>
+            <p>
+                Our Delicious Food Filled With Yummy taste and Love at Your Doorsteps. Order Now
+            </p>
+
+            <AnimatePresence mode="popLayout">
+                <div className="flex flex-wrap text-xl max-w-fit mx-auto sticky top-20 z-[10] bg-black/70 backdrop-blur-lg mb-10 gap-4 justify-center  md:px-10 px-4  rounded-lg py-5 font-bebas mt-10  sm:text-2xl uppercase tracking-wide">
                     {tabs.map((tab) => (
                         <button
                             key={tab}
@@ -48,17 +49,15 @@ const OrderOnline: React.FC = () => {
                         </button>
                     ))}
                 </div>
-            </div>
-
-            <AnimatePresence mode="popLayout">
                 <motion.div
                     key={activeTab}
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
                     transition={{ duration: 0.3 }}
-                    className="flex flex-wrap md:justify-start gap-4 justify-center sm:gap-6"
+                    className="flex flex-wrap  gap-4 justify-center sm:gap-8"
                 >
+
                     {menuData[activeTab]?.map((item, index) => (
                         <MenuCard key={index} {...item} onClick={() => handleCardClick(item)} />
                     ))}
@@ -70,8 +69,7 @@ const OrderOnline: React.FC = () => {
                     isOpen={!!selectedItem}
                     onClose={handleCloseModal}
                     onAddToCart={handleAddToCart}
-                    category={selectedCategory} // Pass the category to the modal
-                    Extras={Extras}
+                    category={selectedCategory} 
                     {...selectedItem}
                 />
             </AnimatePresence>

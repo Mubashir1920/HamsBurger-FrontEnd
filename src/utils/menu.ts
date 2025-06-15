@@ -14,6 +14,13 @@ export type PizzaSize = {
     description?: string
 }
 
+
+export type SizeOption = {
+    name: string
+    price: number
+    description: string
+}
+
 export type DealItem = {
     type: "burger" | "pizza" | "drink" | "fries" | "nuggets" | "wings" | "dip"
     quantity: number
@@ -22,6 +29,42 @@ export type DealItem = {
     defaultItem?: string
     burgerType?: "chicken" | "beef" | "any" // Add burger type specification
 }
+
+export const Flavours = {
+    chickenBurger: [
+        "Chicken Burger",
+        "Spicy Chicken Burger",
+        "BBQ Chicken Burger",
+        "Grilled Chicken Burger",
+        "Teriyaki Chicken Burger",
+        "Buffalo Chicken Burger",
+        "Chicken Caesar Burger"
+    ],
+    beefBurger: [
+        "Classic Beef Burger",
+        "Double Beef Cheeseburger",
+        "Bacon Burger",
+        "Mushroom Swiss Burger",
+        "Butcher Beef",
+        "Spicy Jalapeño Burger"
+    ],
+    pizza: [
+        "Margherita Pizza",
+        "Pepperoni Pizza",
+        "BBQ Chicken Pizza",
+        "Veggie Pizza",
+        "Hawaiian Pizza",
+        "Meat Lovers Pizza",
+        "Buffalo Chicken Pizza"
+    ],
+    drinks: [
+        'Next Cola',
+        'Lemon Up Cola',
+        'Gourmet Cola',
+        'Lamanta'
+    ]
+}
+
 
 export const menuData: Record<string, MenuItem[]> = {
     ChickenBurger: [
@@ -191,48 +234,48 @@ export const menuData: Record<string, MenuItem[]> = {
     Deals: [
         {
             title: "Classic Combo Meal",
-            desc: "1 Chicken Burger, Crispy Fries & 500ml Drink – a perfect all-in-one meal.",
+            desc: "1 Chicken Burger, Crispy Fries (Regular) & 500ml Drink – a perfect all-in-one meal.",
             price: 9.49,
             image: "/assets/deals/deal1.avif",
             isNew: true,
             dealItems: [
                 { type: "burger", quantity: 1, isDefault: false, burgerType: "chicken" },
-                { type: "fries", quantity: 1, isDefault: true, defaultItem: "French Fries" },
+                { type: "fries", quantity: 1, isDefault: true, defaultItem: "French Fries (Regular)" },
                 { type: "drink", quantity: 1, size: "500ml", isDefault: false },
             ],
         },
         {
             title: "Family Feast Box",
-            desc: "2 Large Pizzas, 10 Nuggets, 2 Fries & 1.5L Drink – enough for the whole family.",
+            desc: "2 Large Pizzas, 10 Nuggets, 2 Fries (Regular) & 1.5L Drink – enough for the whole family.",
             price: 27.99,
             image: "/assets/deals/deal2.jpg",
             dealItems: [
                 { type: "pizza", quantity: 2, size: "Large", isDefault: false },
                 { type: "nuggets", quantity: 10, isDefault: true, defaultItem: "Chicken Nuggets" },
-                { type: "fries", quantity: 2, isDefault: true, defaultItem: "French Fries" },
+                { type: "fries", quantity: 2, isDefault: true, defaultItem: "French Fries (Regular)" },
                 { type: "drink", quantity: 1, size: "1.5L", isDefault: false },
             ],
         },
         {
             title: "Double Trouble Burger Deal",
-            desc: "2 Beef Burgers, 2 Fries, 2 Drinks – made for sharing or serious hunger.",
+            desc: "2 Beef Burgers, 2 Fries (Regular), 2 Drinks – made for sharing or serious hunger.",
             price: 18.99,
             image: "/assets/deals/deal3.webp",
             dealItems: [
                 { type: "burger", quantity: 2, isDefault: false, burgerType: "beef" },
-                { type: "fries", quantity: 2, isDefault: true, defaultItem: "French Fries" },
+                { type: "fries", quantity: 2, isDefault: true, defaultItem: "French Fries (Regular)" },
                 { type: "drink", quantity: 2, isDefault: false },
             ],
         },
         {
             title: "Spicy Lover's Pack",
-            desc: "Spicy Chicken Burger, Jalapeño Fries, Spicy Mayo Dip & 500ml Drink.",
+            desc: "Spicy Chicken Burger, Jalapeño Fries (Regular), Spicy Mayo Dip & 500ml Drink.",
             price: 11.49,
             image: "/assets/deals/deal2.jpg",
             dealItems: [
                 { type: "burger", quantity: 1, isDefault: false, burgerType: "chicken" },
-                { type: "fries", quantity: 1, isDefault: true, defaultItem: "Jalapeño Fries" },
-                { type: "dip", quantity: 1, isDefault: false },
+                { type: "fries", quantity: 1, isDefault: true, defaultItem: "Jalapeño Fries (Regular)" },
+                { type: "dip", quantity: 1, isDefault: true, defaultItem: "Spicy Mayo" },
                 { type: "drink", quantity: 1, size: "500ml", isDefault: false },
             ],
         },
@@ -244,18 +287,18 @@ export const menuData: Record<string, MenuItem[]> = {
             dealItems: [
                 { type: "pizza", quantity: 1, size: "Medium", isDefault: false },
                 { type: "wings", quantity: 6, isDefault: true, defaultItem: "Chicken Wings" },
-                { type: "dip", quantity: 1, isDefault: false },
+                { type: "dip", quantity: 1, isDefault: true, defaultItem: "Garlic Mayo" },
             ],
         },
         {
             title: "Snack Attack Box",
-            desc: "6 Nuggets, Small Fries, Dips Sampler & 500ml Drink – perfect for a quick bite.",
+            desc: "6 Nuggets, Small Fries (Regular), Dips Sampler & 500ml Drink – perfect for a quick bite.",
             price: 8.49,
             image: "/assets/deals/deal3.webp",
             dealItems: [
                 { type: "nuggets", quantity: 6, isDefault: true, defaultItem: "Chicken Nuggets" },
-                { type: "fries", quantity: 1, size: "Small", isDefault: true, defaultItem: "French Fries" },
-                { type: "dip", quantity: 1, isDefault: false },
+                { type: "fries", quantity: 1, size: "Small", isDefault: true, defaultItem: "French Fries (Regular)" },
+                { type: "dip", quantity: 1, isDefault: true, defaultItem: "Cheese Dip" },
                 { type: "drink", quantity: 1, size: "500ml", isDefault: false },
             ],
         },
@@ -263,62 +306,61 @@ export const menuData: Record<string, MenuItem[]> = {
 }
 
 export type ExtraItem = {
-    title: string
-    desc?: string
-    price: number
-    image: string
-    options?: string[]
-}
-
+    title: string;
+    desc?: string;
+    price: number;
+    image: string;
+    flavour?: string[];
+    options?: { [key: string]: number }
+};
 export const Extras: ExtraItem[] = [
     {
-        title: "French Fries",
+        title: "French Fries (Regular)",
         desc: "Crispy golden fries.",
         price: 2.99,
         image: "/assets/extras/1.png",
     },
     {
-        title: "Jalapeño Fries",
+        title: "Jalapeño Fries (Regular) ",
         desc: "Spicy jalapeño seasoned fries.",
         price: 3.49,
         image: "/assets/extras/1.png",
     },
     {
-        title: "Chicken Nuggets",
+        title: "Chicken Nuggets (8 Pcs) ",
         desc: "Crispy chicken nuggets.",
         price: 4.49,
         image: "/assets/extras/2.png",
     },
     {
-        title: "Chicken Wings",
+        title: "Chicken Wings (4 Pcs) ",
         desc: "Crispy chicken wings.",
         price: 5.99,
         image: "/assets/extras/2.png",
     },
     {
-        title: "Pepsi",
-        price: 2.49,
-        image: "/assets/extras/3.png",
-        options: ["500ml", "1.5 Lit."],
-    },
-    {
-        title: "NextCola",
+        title: "Drink",
         price: 2.49,
         image: "/assets/extras/4.png",
-        options: ["500ml", "1.5 Lit."],
-    },
-    {
-        title: "7UP",
-        price: 2.49,
-        image: "/assets/extras/5.png",
-        options: ["500ml", "1.5 Lit."],
+        flavour: ["Next Cola", "Lemon Up", "Manta"],
+        options: {
+            "500ml": 2.49,
+            "1.5 L": 3.99
+        }
     },
     {
         title: "Dips",
         desc: "Choice of dips.",
         price: 0.99,
         image: "/assets/extras/6.png",
-        options: ["Garlic Mayo", "Spicy Mayo", "Honey Mustard", "BBQ Sauce", "Ranch", "Cheese Dip"],
+        options: {
+            "Garlic Mayo": 0.99,
+            "Spicy Mayo": 0.99,
+            "Honey Mustard": 0.99,
+            "BBQ Sauce": 0.99,
+            "Ranch": 0.99,
+            "Cheese Dip": 0.99
+        }
     },
 ]
 
@@ -364,3 +406,8 @@ export const getItemOptions = (type: string, burgerType?: "chicken" | "beef" | "
             return []
     }
 }
+
+
+
+
+

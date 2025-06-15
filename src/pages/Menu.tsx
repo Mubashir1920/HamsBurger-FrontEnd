@@ -11,7 +11,7 @@ const Menu: React.FC = () => {
 
     return (
         <section className="text-white py-16 px-4">
-            <div className="text-center mb-10">
+            <div className="text-center  mb-10">
                 <p className="text-red-500 italic mb-2">Our menu</p>
                 <h2 className="text-4xl md:text-6xl font-bebas uppercase">
                     Delicious Tasty Dishes

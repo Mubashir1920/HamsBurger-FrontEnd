@@ -15,7 +15,7 @@ const MenuCard: React.FC<MenuCardProps> = ({ image, title, desc, price, onClick 
     >
 
       {/* Image */}
-      <div className="w-full h-48 sm:h-56 md:h-64 rounded-lg overflow-hidden">
+      <div className="w-full h-48 sm:h-56 md:h-[20rem] rounded-lg overflow-hidden">
         <img
           src={image}
           alt={title}
