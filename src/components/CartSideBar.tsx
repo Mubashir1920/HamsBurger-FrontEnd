@@ -13,21 +13,7 @@ const CartSideBar = () => {
     const [active, setActive] = useState(false)
     const lenis = useLenis()
 
-    const { cart, totalAmount, totalItem, deliveryCharges, updateQuantity, removeFromCart } = useCartContext()
-
-    const handleIncrease = (id: string) => {
-        const item = cart.find((item) => item.id === id)
-        if (item) {
-            updateQuantity(id, item.quantity + 1)
-        }
-    }
-
-    const handleDecrease = (id: string) => {
-        const item = cart.find((item) => item.id === id)
-        if (item && item.quantity > 1) {
-            updateQuantity(id, item.quantity - 1)
-        }
-    }
+    const { cart, totalAmount, totalItem, deliveryCharges, removeFromCart } = useCartContext()
 
     const handleRemove = (id: string) => {
         removeFromCart(id)
@@ -121,8 +107,6 @@ const CartSideBar = () => {
                                             quantity={item.quantity}
                                             image={item.image}
                                             selectedItems={item.selectedItems}
-                                            onIncrease={handleIncrease}
-                                            onDecrease={handleDecrease}
                                             onRemove={handleRemove}
                                             compact={true}
                                         />
@@ -153,7 +137,7 @@ const CartSideBar = () => {
                             </div>
                             <div className="flex justify-between items-center mb-4 pt-2 border-t">
                                 <span className="text-2xl">Total:</span>
-                                <span className="text-2xl font-bold text-yellow-400">${finalTotal.toFixed(2)}</span>
+                                <span className="text-2xl ">${finalTotal.toFixed(2)}</span>
                             </div>
                             <Link to="/checkout" className="w-full text-[26px]" onClick={() => setActive(false)}>
                                 <button className="hover:bg-red-800 bg-yellow-700 w-full transition-colors duration-300 uppercase cursor-pointer px-4 py-1 tracking-wide">

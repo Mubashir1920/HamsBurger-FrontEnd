@@ -24,7 +24,7 @@ const HomeMenu: React.FC = () => {
                 <p className="text-red-500 italic mb-2 text-lg">Our menu</p>
                 <h2 className="text-white text-6xl font-bebas font-medium mb-6">THE HOT ITEMS</h2>
 
-                <div className="flex flex-wrap text-xl max-w-fit mx-auto sticky top-20 z-[10] bg-black/70 backdrop-blur-lg mb-10 gap-4 justify-center  md:px-10 px-4  rounded-lg py-5 font-bebas mt-10  sm:text-2xl uppercase tracking-wide">
+                <div className="flex flex-wrap text-xl max-w-fit mx-auto sticky top-20 z-[10] bg-black/70 backdrop-blur-lg mb-10 gap-4 justify-baseline sm:justify-center  md:px-10 px-4  rounded-lg py-5 font-bebas mt-10  sm:text-2xl uppercase tracking-wide">
                     {tabs.map((tab) => (
                         <button
                             key={tab}

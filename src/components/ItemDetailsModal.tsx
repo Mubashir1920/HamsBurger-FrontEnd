@@ -12,7 +12,7 @@ import { FiMinus, FiPlus } from "react-icons/fi"
 
 import { useCartContext } from "../Store/Context/CartContext"
 
-import type { DealItem, ExtraItem, SizeOption } from "../utils/menu"
+import type { DealItem, SizeOption } from "../utils/menu"
 import { Flavours } from "../utils/menu"
 import ExtraItems from "./Extras"
 
@@ -38,6 +38,20 @@ interface ItemDetailsModalProps {
     dealItems?: DealItem[]
 }
 
+interface SelectedDealData {
+    selectedFlavours: Record<number, string[]>
+    defaultItems: Array<{ name: string; quantity: number }>
+}
+
+interface CartItem {
+    id: string
+    name: string
+    price: number
+    quantity: number
+    image: string
+    selectedItems: any
+}
+
 const ItemDetailsModal: React.FC<ItemDetailsModalProps> = ({
     isOpen,
     onClose,
@@ -47,22 +61,17 @@ const ItemDetailsModal: React.FC<ItemDetailsModalProps> = ({
     price,
     sizes,
     category,
-    dealItems,
+    dealItems = [],
 }) => {
     const [quantity, setQuantity] = useState<number>(1)
-
-    const [mealtype, setMealType] = useState<string>("simple") // For Simple Burgers
+    const [mealtype, setMealType] = useState<string>("simple")
     const [pizzaSizes, setPizzaSizes] = useState<(SizeOption | null)[]>([])
-
-    const [selectedDealData, setSelectedDealData] = useState({
-        selectedFlavours: {}, // { '0': ['flavour1', 'flavour2'], ... }
-        defaultItems: [], // [{ name: 'French Fries (Regular)', quantity: 2 }, ...]
+    const [selectedDealData, setSelectedDealData] = useState<SelectedDealData>({
+        selectedFlavours: {},
+        defaultItems: [],
     })
 
-    const [selectedExtras, setSelectedExtras] = useState<ExtraItem[]>([])
-
     const { addToCart } = useCartContext()
-
     const lenis = useLenis()
     const isInitialized = useRef(false)
 
@@ -80,13 +89,13 @@ const ItemDetailsModal: React.FC<ItemDetailsModalProps> = ({
     }
 
     const handleAdd = () => {
-        let selectedItems = {}
+        let selectedItems: any = {}
 
         if (category === "Pizza") {
             selectedItems = {
                 type: "Pizza",
                 name: title,
-                sizes: pizzaSizes.filter((size) => size !== null),
+                sizes: pizzaSizes.filter((size): size is SizeOption => size !== null),
                 quantity,
                 totalPrice: calculateTotalPrice(),
             }
@@ -109,31 +118,29 @@ const ItemDetailsModal: React.FC<ItemDetailsModalProps> = ({
             }
         }
 
-        const itemToAdd = {
+        const itemToAdd: CartItem = {
             id: title + "-" + Math.random().toString(36).slice(2, 5),
             name: title,
-            price: Number.parseFloat(calculateTotalPrice()), // Convert string back to number
+            price: Number.parseFloat(calculateTotalPrice()),
             quantity,
             image,
-            selectedItems, // Add the detailed selection object
+            selectedItems,
         }
 
         addToCart(itemToAdd)
         onClose()
     }
 
-    const calculateTotalPrice = () => {
+    const calculateTotalPrice = (): string => {
         let finalPrice = 0
 
         if (category === "Pizza") {
-            // Sum up the price of all selected pizza sizes
             finalPrice = pizzaSizes.reduce((total, size) => {
                 return total + (size?.price || 0)
             }, 0)
         } else if (category === "Deals") {
             finalPrice = price * quantity
         } else {
-            // For regular items (e.g., burgers, fries)
             finalPrice = (mealtype === "combo" ? price + 3.99 : price) * quantity
         }
 
@@ -141,13 +148,11 @@ const ItemDetailsModal: React.FC<ItemDetailsModalProps> = ({
     }
 
     const isAddToCartDisabled = useMemo(() => {
-        // For Pizza: Check if all pizza sizes are selected
         if (category === "Pizza") {
             return pizzaSizes.length !== quantity || pizzaSizes.some((size) => !size)
         }
 
-        // For Deals: Check if all non-default items have flavours selected
-        if (category === "Deals" && dealItems) {
+        if (category === "Deals" && dealItems.length > 0) {
             const nonDefaultItems = dealItems.filter((item) => !item.isDefault)
 
             for (let i = 0; i < nonDefaultItems.length; i++) {
@@ -155,7 +160,6 @@ const ItemDetailsModal: React.FC<ItemDetailsModalProps> = ({
                 const requiredSelections = item.quantity * quantity
                 const currentSelections = selectedDealData.selectedFlavours[i] || []
 
-                // Check if all selections are made and none are empty
                 if (currentSelections.length !== requiredSelections || currentSelections.some((selection) => !selection)) {
                     return true
                 }
@@ -166,39 +170,37 @@ const ItemDetailsModal: React.FC<ItemDetailsModalProps> = ({
     }, [category, pizzaSizes, quantity, selectedDealData.selectedFlavours, dealItems])
 
     useEffect(() => {
-        const defaultItems =
-            dealItems &&
-            dealItems
+        if (isOpen && dealItems.length > 0) {
+            const defaultItems = dealItems
                 .filter((item) => item.isDefault)
                 .map((item) => ({
                     name: item.defaultItem || item.type,
                     quantity: item.quantity * quantity,
                 }))
 
-        setSelectedDealData((prev) => ({
-            ...prev,
-            defaultItems,
-        }))
-    }, [dealItems, quantity])
+            setSelectedDealData((prev) => ({
+                ...prev,
+                defaultItems,
+            }))
+        }
+    }, [isOpen, dealItems, quantity])
 
-    // Main useEffect - only runs when modal opens/closes
     useEffect(() => {
-        const handleEsc = (event: any) => {
+        const handleEsc = (event: KeyboardEvent) => {
             if (event.key === "Escape") {
                 onClose()
             }
         }
 
         if (isOpen && !isInitialized.current) {
-            // Reset all state when modal opens
+            // Reset state when modal opens, but don't reset defaultItems here
             setQuantity(1)
             setMealType("simple")
             setPizzaSizes([])
-            setSelectedDealData({
+            setSelectedDealData((prev) => ({
                 selectedFlavours: {},
-                defaultItems: [],
-            })
-            setSelectedExtras([])
+                defaultItems: prev.defaultItems, // Preserve defaultItems
+            }))
             document.addEventListener("keyup", handleEsc)
             isInitialized.current = true
         }
@@ -219,7 +221,6 @@ const ItemDetailsModal: React.FC<ItemDetailsModalProps> = ({
                     selectedFlavours: {},
                     defaultItems: [],
                 })
-                setSelectedExtras([])
                 isInitialized.current = false
             }
         }
@@ -233,7 +234,6 @@ const ItemDetailsModal: React.FC<ItemDetailsModalProps> = ({
 
     useEffect(() => {
         if (category === "Pizza") {
-            // Reset pizza sizes when quantity changes
             setPizzaSizes(Array(quantity).fill(null))
         }
     }, [quantity, category])
@@ -258,7 +258,6 @@ const ItemDetailsModal: React.FC<ItemDetailsModalProps> = ({
                         exit="hidden"
                         onClick={(e) => e.stopPropagation()}
                     >
-                        {/* Close Button */}
                         <button
                             onClick={onClose}
                             className="absolute bg-black p-2 top-4 right-4 cursor-pointer text-white hover:text-theme-red transition z-10"
@@ -266,19 +265,16 @@ const ItemDetailsModal: React.FC<ItemDetailsModalProps> = ({
                             <IoMdClose size={30} />
                         </button>
 
-                        {/* Main Content */}
                         <div className="flex flex-col md:flex-row">
-                            {/* Left Image */}
                             <div className="w-full md:w-1/2 md:sticky md:top-0 aspect-3/2 h-64 md:h-[70vh]">
                                 <img src={image || "/placeholder.svg"} alt={title} className="w-full h-full object-cover" />
                             </div>
 
-                            {/* Right Details */}
                             <div className="w-full md:w-1/2 flex flex-col justify-start p-6 mt-5">
                                 <h2 className="text-4xl font-bebas uppercase">{title}</h2>
                                 <p className="mt-2 text-sm text-gray-300">{desc}</p>
                                 <motion.p
-                                    key={calculateTotalPrice()} // This triggers re-render/animation when value changes
+                                    key={calculateTotalPrice()}
                                     initial={{ x: 0.8, opacity: 0 }}
                                     animate={{ x: 1, opacity: 1 }}
                                     transition={{ duration: 0.3 }}
@@ -287,7 +283,6 @@ const ItemDetailsModal: React.FC<ItemDetailsModalProps> = ({
                                     ${calculateTotalPrice()}/-
                                 </motion.p>
 
-                                {/* Quantity */}
                                 <div className="mt-4 flex items-center gap-4">
                                     <span className="font-semibold">Quantity:</span>
                                     <div className="flex items-center gap-2">
@@ -306,7 +301,6 @@ const ItemDetailsModal: React.FC<ItemDetailsModalProps> = ({
                                     </div>
                                 </div>
 
-                                {/* Combo Option (for Brgers) */}
                                 {category !== "Pizza" && category !== "Deals" && (
                                     <div className="mt-4 flex flex-col gap-2">
                                         <label className="font-semibold">Meal: </label>
@@ -320,17 +314,16 @@ const ItemDetailsModal: React.FC<ItemDetailsModalProps> = ({
                                         </select>
                                     </div>
                                 )}
-                                {/*  Category is Pizza */}
+
                                 {category === "Pizza" && (
                                     <div className="mt-4 flex flex-col gap-2">
                                         <label className="font-semibold">Size:</label>
-
                                         {Array.from({ length: quantity }).map((_, idx) => (
                                             <select
                                                 key={idx}
                                                 value={pizzaSizes[idx] ? JSON.stringify(pizzaSizes[idx]) : ""}
                                                 onChange={(e) => {
-                                                    const selected = JSON.parse(e.target.value)
+                                                    const selected = JSON.parse(e.target.value) as SizeOption
                                                     setPizzaSizes((prev) => {
                                                         const updated = [...prev]
                                                         updated[idx] = selected
@@ -342,7 +335,6 @@ const ItemDetailsModal: React.FC<ItemDetailsModalProps> = ({
                                                 <option value="" disabled>
                                                     Select Size {quantity > 1 ? `(${idx + 1})` : ""}
                                                 </option>
-
                                                 {sizes?.map((size, i) => (
                                                     <option key={i} value={JSON.stringify(size)}>
                                                         {size.name} ({size.description}) — ${size.price}
@@ -353,22 +345,20 @@ const ItemDetailsModal: React.FC<ItemDetailsModalProps> = ({
                                     </div>
                                 )}
 
-                                {/* Category is Deal */}
-                                {category === "Deals" && (
+                                {category === "Deals" && dealItems.length > 0 && (
                                     <div className="mt-4 flex flex-col gap-2">
-                                        {/* First render non-default items */}
                                         {dealItems
                                             .filter((item) => !item.isDefault)
                                             .map((dealItem, idx) => {
-                                                let availableFlavours = []
+                                                let availableFlavours: string[] = []
 
                                                 if (dealItem.type === "burger" && dealItem.burgerType) {
                                                     availableFlavours =
-                                                        dealItem.burgerType === "chicken" ? Flavours.chickenBurger : Flavours.beefBurger
+                                                        dealItem.burgerType === "chicken" ? Flavours.chickenBurger || [] : Flavours.beefBurger || []
                                                 } else if (dealItem.type === "pizza") {
-                                                    availableFlavours = Flavours.pizza
+                                                    availableFlavours = Flavours.pizza || []
                                                 } else if (dealItem.type === "drink") {
-                                                    availableFlavours = Flavours.drinks ?? []
+                                                    availableFlavours = Flavours.drinks || []
                                                 }
 
                                                 return (
@@ -377,7 +367,6 @@ const ItemDetailsModal: React.FC<ItemDetailsModalProps> = ({
                                                             {dealItem.quantity} x {dealItem.type}
                                                         </p>
 
-                                                        {/* Render one <select> for each quantity unit */}
                                                         {Array.from({ length: dealItem.quantity * quantity }).map((_, i) => (
                                                             <select
                                                                 key={`${idx}-${i}`}
@@ -389,7 +378,6 @@ const ItemDetailsModal: React.FC<ItemDetailsModalProps> = ({
                                                                         const current = { ...prev.selectedFlavours }
                                                                         const selections = current[idx] ? [...current[idx]] : []
 
-                                                                        // Ensure we have correct length
                                                                         selections[i] = flavour
 
                                                                         return {
@@ -416,8 +404,7 @@ const ItemDetailsModal: React.FC<ItemDetailsModalProps> = ({
                                                 )
                                             })}
 
-                                        {/* Then render default items */}
-                                        <div className=" mt-5 flex flex-wrap gap-2">
+                                        <div className="mt-5 flex flex-wrap gap-2">
                                             {dealItems
                                                 .filter((item) => item.isDefault)
                                                 .map((dealItem, idx) => (
@@ -433,7 +420,6 @@ const ItemDetailsModal: React.FC<ItemDetailsModalProps> = ({
                                     </div>
                                 )}
 
-                                {/* Add Button */}
                                 <div className="mt-6">
                                     <button
                                         onClick={handleAdd}
@@ -446,7 +432,6 @@ const ItemDetailsModal: React.FC<ItemDetailsModalProps> = ({
                             </div>
                         </div>
 
-                        {/* Extras Section */}
                         <ExtraItems />
                     </motion.div>
                 </motion.div>

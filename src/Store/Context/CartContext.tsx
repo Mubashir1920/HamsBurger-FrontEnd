@@ -3,6 +3,7 @@
 import type React from "react"
 import { createContext, useContext, useReducer, type ReactNode } from "react"
 import reducer from "../reducer/CartReducer"
+import { useNotification } from "./NotificationContext"
 
 // Define the shape of a cart item
 export type CartItem = {
@@ -56,17 +57,27 @@ type CartProviderProps = {
 
 const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState)
+  const { showNotification } = useNotification()
 
   const addToCart = (item: CartItem) => {
     dispatch({ type: "ADD_TO_CART", payload: { item } })
+    showNotification("added", item)
   }
 
   const removeFromCart = (id: string) => {
-    dispatch({ type: "REMOVE_FROM_CART", payload: { id } })
+    const item = state.cart.find((cartItem) => cartItem.id === id)
+    if (item) {
+      dispatch({ type: "REMOVE_FROM_CART", payload: { id } })
+      showNotification("removed", item)
+    }
   }
 
   const updateQuantity = (id: string, quantity: number) => {
-    dispatch({ type: "UPDATE_QUANTITY", payload: { id, quantity } })
+    const item = state.cart.find((cartItem) => cartItem.id === id)
+    if (item) {
+      dispatch({ type: "UPDATE_QUANTITY", payload: { id, quantity } })
+      showNotification("updated", { ...item, quantity })
+    }
   }
 
   const clearCart = () => {

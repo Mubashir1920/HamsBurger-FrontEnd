@@ -1,7 +1,5 @@
-"use client"
 
 import { useState } from "react"
-import { FiMinus, FiPlus } from "react-icons/fi"
 import { MdDelete } from "react-icons/md"
 
 type CartItemProps = {
@@ -22,8 +20,6 @@ type CartItemProps = {
         defaultItems?: Array<{ name: string; quantity: number }>
         mealType?: string
     }
-    onIncrease: (id: string) => void
-    onDecrease: (id: string) => void
     onRemove: (id: string) => void
     compact?: boolean // For sidebar vs full page layout
 }
@@ -34,15 +30,11 @@ export function CartItem({
     price,
     quantity,
     image,
-    description,
-    category,
     selectedItems,
-    onIncrease,
-    onDecrease,
     onRemove,
     compact = false,
 }: CartItemProps) {
-    const totalPrice = price * quantity
+
     const [showDetails, setShowDetails] = useState(false)
 
     const renderSelectedItems = () => {
@@ -72,9 +64,9 @@ export function CartItem({
 
                 {/* Deal flavours */}
                 {selectedItems.selectedFlavours && Object.keys(selectedItems.selectedFlavours).length > 0 && (
-                    <div className={`${compact ? "text-[14px]" : "text-sm"}`}>
+                    <div className={` flex ${compact ? "text-[14px]" : "text-sm"}`}>
                         <span className="text-gray-300">Selections: </span>
-                        <div className="ml-2 space-y-1">
+                        <div className="ml-2 flex space-y-1">
                             {Object.entries(selectedItems.selectedFlavours).map(([idx, flavours]) => (
                                 <div key={idx} className="text-yellow-700">
                                     {flavours.join(", ")}
@@ -102,6 +94,8 @@ export function CartItem({
         )
     }
 
+    console.log(selectedItems?.defaultItems);
+
     return (
         <div
             className={`w-full bg-black scroll-smooth font-bebas text-white border border-white/20 rounded-2xl  ${compact ? "p-3" : "p-4"
@@ -111,7 +105,7 @@ export function CartItem({
                 {/* Food Image */}
                 <div className={`flex-shrink-0 ${compact ? "w-full sm:w-20 h-20" : "w-24 h-24"}`}>
                     <img
-                        src={image || "/placeholder.svg"}
+                        src={image}
                         alt={name}
                         width={compact ? 80 : 96}
                         height={compact ? 80 : 96}
@@ -123,7 +117,7 @@ export function CartItem({
                 <div className="flex-1 min-w-0">
                     <div className="flex justify-between items-start">
                         <div className="flex-1 min-w-0">
-                            <h3 className={`  tracking-wide text-wrap w-[80%]  ${compact ? "text-[24px] " : "text-base"}`}>{name}</h3>
+                            <h3 className={` text-wrap w-[80%]  ${compact ? "text-[24px] " : "text-base"}`}>{quantity} x {name}</h3>
 
                             <div className={`text-yellow-700  ${compact ? "text-[20px] " : "text-lg"} mt-2`}>${price.toFixed(2)}</div>
 
@@ -131,7 +125,7 @@ export function CartItem({
                             {selectedItems && (
                                 <button
                                     onClick={() => setShowDetails(!showDetails)}
-                                    className={`text-blue-400 hover:text-blue-300 mt-1 underline ${compact ? "text-[12px]" : "text-xs"}`}
+                                    className={` mt-1 underline text-sm tracking-wide`}
                                 >
                                     {showDetails ? "Hide details" : "Show details"}
                                 </button>
@@ -154,8 +148,8 @@ export function CartItem({
             {showDetails && renderSelectedItems()}
 
             {/* Quantity Controls and Total */}
-            <div className="flex items-center justify-between pt-3 border-t border-white/10 mt-3">
-                {/* Quantity Controls */}
+            {/* <div className="flex items-center justify-between pt-3 border-t border-white/10 mt-3">
+   
                 <div className="flex items-center  space-x-3">
                     <span className={` ${compact ? "text-[16px] " : "text-base"}`}>Qty:</span>
                     <div className="flex items-center gap-5 px-3">
@@ -173,9 +167,8 @@ export function CartItem({
                     </div>
                 </div>
 
-                {/* Total Price */}
                 <div className={` text-yellow-700 text-xl`}>${totalPrice.toFixed(2)}</div>
-            </div>
+            </div> */}
         </div>
     )
 }
