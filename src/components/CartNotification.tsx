@@ -53,19 +53,6 @@ const CartNotification: React.FC<CartNotificationProps> = ({ notification, onClo
 
     if (!notification) return null
 
-    const getIcon = () => {
-        switch (notification.type) {
-            case "added":
-                return <HiCheck className="text-green-400" size={20} />
-            case "removed":
-                return <HiX className="text-red-400" size={20} />
-            case "updated":
-                return <HiShoppingBag className="text-blue-400" size={20} />
-            default:
-                return <HiShoppingBag className="text-gray-400" size={20} />
-        }
-    }
-
     const getMessage = () => {
         switch (notification.type) {
             case "added":
@@ -156,7 +143,7 @@ const CartNotification: React.FC<CartNotificationProps> = ({ notification, onClo
                                     {/* Close button */}
                                     <button
                                         onClick={onClose}
-                                        className="flex-shrink-0 text-gray-400 hover:text-white transition-colors ml-2"
+                                        className="flex-shrink-0 cursor-pointer text-gray-400 hover:text-white transition-colors ml-2"
                                     >
                                         <HiX size={16} />
                                     </button>

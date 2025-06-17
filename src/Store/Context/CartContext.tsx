@@ -1,6 +1,4 @@
-"use client"
 
-import type React from "react"
 import { createContext, useContext, useReducer, type ReactNode } from "react"
 import reducer from "../reducer/CartReducer"
 import { useNotification } from "./NotificationContext"

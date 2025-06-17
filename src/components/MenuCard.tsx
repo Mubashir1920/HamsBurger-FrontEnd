@@ -11,7 +11,7 @@ interface MenuCardProps {
 const MenuCard: React.FC<MenuCardProps> = ({ image, title, desc, price, onClick }) => {
   return (
     <div
-      className="w-full max-w-sm sm:max-w-md md:max-w-[30%] bg-black text-white flex flex-col text-left font-bebas rounded-2xl p-4 sm:p-6 gap-4 justify-between relative shadow-md"
+      className="w-full max-w-sm sm:max-w-md md:max-w-[45%] lg:max-w-[30%] bg-black text-white flex flex-col text-left font-bebas rounded-2xl p-4 sm:p-6 gap-4 justify-between relative shadow-md"
     >
 
       {/* Image */}
@@ -28,7 +28,7 @@ const MenuCard: React.FC<MenuCardProps> = ({ image, title, desc, price, onClick 
         <h3 className="text-white text-xl sm:text-2xl md:text-3xl tracking-wide font-medium uppercase">
           {title}
         </h3>
-      <p className="text-gray-200 text-sm sm:text-base capitalize font-poppin leading-snug">
+        <p className="text-gray-200 text-sm sm:text-base capitalize font-poppin leading-snug">
           {desc}
         </p>
         <span className="text-yellow-400 text-xl font-semibold mt-1 tracking-tight font-poppin">${price}/-</span>

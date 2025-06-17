@@ -14,6 +14,7 @@ import OrderOnline from "./pages/OrderOnline";
 import { Routes, Route } from "react-router";
 import Page404 from "./pages/404";
 import ScrollToTop from "./components/ScrollToTop";
+import CheckOut from "./pages/CheckOut";
 
 
 
@@ -31,6 +32,7 @@ function App() {
           {/* <Route path="/orderonline" element={<OrderOnline />} /> */}
           <Route path="/aboutus" element={<About />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/checkout" element={<CheckOut />} />
           <Route path="/*" element={<Page404 />} />
         </Routes>
         <Footer />

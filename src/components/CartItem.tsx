@@ -55,10 +55,12 @@ export function CartItem({
                 )}
 
                 {/* Meal type for burgers */}
-                {selectedItems.mealType && (
+                {selectedItems.mealType && selectedItems.mealType == 'combo' && (
                     <div className={`${compact ? "text-[14px]" : "text-sm"}`}>
                         <span className="text-gray-300">Meal: </span>
-                        <span className="text-yellow-700 capitalize">{selectedItems.mealType}</span>
+                        <span className="text-yellow-700 capitalize">
+                            Fries + Drink 500ml (Combo)
+                        </span>
                     </div>
                 )}
 

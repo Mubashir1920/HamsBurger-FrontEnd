@@ -423,7 +423,7 @@ const ItemDetailsModal: React.FC<ItemDetailsModalProps> = ({
                                 <div className="mt-6">
                                     <button
                                         onClick={handleAdd}
-                                        className="bg-theme-red hover:bg-yellow-700 disabled:hover:bg-theme-red disabled:opacity-70 disabled:cursor-not-allowed text-white font-semibold uppercase px-5 py-2 rounded transition-colors"
+                                        className="bg-theme-red hover:bg-yellow-700 disabled:hover:bg-theme-red disabled:opacity-70 disabled:cursor-not-allowed text-white font-semibold cursor-pointer uppercase px-5 py-2 rounded transition-colors"
                                         disabled={isAddToCartDisabled}
                                     >
                                         Add to Cart

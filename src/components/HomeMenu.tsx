@@ -15,9 +15,6 @@ const HomeMenu: React.FC = () => {
     const handleCardClick = (item: any) => setSelectedItem(item)
     const handleCloseModal = () => setSelectedItem(null)
 
-    console.log(selectedItem);
-
-
     return (
         <>
             <section className="py-12 px-4 text-center">

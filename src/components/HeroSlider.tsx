@@ -4,6 +4,8 @@ import Slide1 from '/assets/slide1.png';
 import Slide2 from '/assets/slide2.png';
 import Slide3 from '/assets/slide3.png';
 import { Link } from 'react-router';
+import { motion } from 'motion/react';
+
 
 type Slide = {
     id: number;
@@ -54,8 +56,8 @@ const HeroSlider: React.FC = () => {
     }, []);
 
     return (
-        <section className='relative h-[90dvh] py-4 text-white' >
-            {/* Social Media */}
+        <section className='relative h-[100dvh]  text-white' >
+
             <div className="absolute -left-40 top-1/2  -rotate-90  font-semibold flex  gap-2 text-sm  z-20">
                 <div className="flex items-center gap-2">
                     <FaFacebookF /> Facebook
@@ -70,7 +72,7 @@ const HeroSlider: React.FC = () => {
                     <FaYoutube /> Youtube
                 </div>
             </div>
-            {/* Right Side Timings */}
+
             <div className="absolute text-sm -right-36 top-1/2 rotate-90   font-semibold flex items-center gap-2   z-20 text-right">
                 <div>Mon - Fri: 8AM - 9PM</div>
                 <div className="border-t border-gray-400 w-8 mx-auto"></div>
@@ -80,7 +82,7 @@ const HeroSlider: React.FC = () => {
 
 
             {/* Slider Container */}
-            <div className="relative mx-auto w-[92%] h-full overflow-hidden rounded-2xl shadow-lg">
+            <div className="relative mx-auto w-full h-full overflow-hidden  shadow-lg">
                 {slides.map((slide, index) => (
                     <div
                         key={slide.id}

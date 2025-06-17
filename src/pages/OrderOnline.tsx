@@ -1,7 +1,7 @@
 import type React from "react"
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Extras, menuData } from "../utils/menu"
+import { menuData } from "../utils/menu"
 import MenuCard from "../components/MenuCard"
 import ItemDetailsModal from "../components/ItemDetailsModal"
 
@@ -69,7 +69,7 @@ const OrderOnline: React.FC = () => {
                     isOpen={!!selectedItem}
                     onClose={handleCloseModal}
                     onAddToCart={handleAddToCart}
-                    category={selectedCategory} 
+                    category={selectedCategory}
                     {...selectedItem}
                 />
             </AnimatePresence>
