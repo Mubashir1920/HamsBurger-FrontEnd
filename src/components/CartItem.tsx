@@ -96,8 +96,6 @@ export function CartItem({
         )
     }
 
-    console.log(selectedItems?.defaultItems);
-
     return (
         <div
             className={`w-full bg-black scroll-smooth font-bebas text-white border border-white/20 rounded-2xl  ${compact ? "p-3" : "p-4"

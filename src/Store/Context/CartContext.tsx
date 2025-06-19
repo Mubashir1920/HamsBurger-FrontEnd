@@ -1,5 +1,5 @@
 
-import { createContext, useContext, useReducer, type ReactNode } from "react"
+import { createContext, useContext, useReducer, useState, type ReactNode } from "react"
 import reducer from "../reducer/CartReducer"
 import { useNotification } from "./NotificationContext"
 
@@ -37,6 +37,8 @@ interface CartContextType extends CartState {
   addToCart: (item: CartItem) => void
   removeFromCart: (id: string) => void
   updateQuantity: (id: string, quantity: number) => void
+  active: boolean,
+  setActive: (active: boolean) => void
   clearCart: () => void
 }
 
@@ -54,6 +56,8 @@ type CartProviderProps = {
 }
 
 const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
+
+  const [active, setActive] = useState(false)
   const [state, dispatch] = useReducer(reducer, initialState)
   const { showNotification } = useNotification()
 
@@ -89,6 +93,8 @@ const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
         addToCart,
         removeFromCart,
         updateQuantity,
+        active,
+        setActive,
         clearCart,
       }}
     >

@@ -1,5 +1,5 @@
 
-import { useState } from "react"
+// import { useState } from "react"
 import { motion } from "motion/react"
 import { OrderType } from "../pages/CheckOut"
 import { FiMapPin, FiUser, FiPhone, FiMail } from "react-icons/fi"
@@ -15,18 +15,24 @@ type DeliveryFormData = {
     instructions: string
 }
 
+type DeliveryFormProps = {
+    orderType: OrderType
+    deliveryForm: DeliveryFormData
+    setDeliveryForm: React.Dispatch<React.SetStateAction<DeliveryFormData>>
+}
 
-const DeliveryForm = ({ orderType }: { orderType: OrderType }) => {
 
-    const [deliveryForm, setDeliveryForm] = useState<DeliveryFormData>({
-        fullName: "",
-        email: "",
-        phone: "",
-        address: "",
-        city: "",
-        postalCode: "",
-        instructions: "",
-    })
+const DeliveryForm = ({ orderType, deliveryForm, setDeliveryForm }: DeliveryFormProps) => {
+
+    // const [deliveryForm, setDeliveryForm] = useState<DeliveryFormData>({
+    //     fullName: "",
+    //     email: "",
+    //     phone: "",
+    //     address: "",
+    //     city: "",
+    //     postalCode: "",
+    //     instructions: "",
+    // })
 
     const handleDeliveryFormChange = (field: keyof DeliveryFormData, value: string) => {
         setDeliveryForm((prev) => ({ ...prev, [field]: value }))

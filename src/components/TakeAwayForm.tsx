@@ -1,5 +1,5 @@
 
-import { useState } from "react"
+// import { useState } from "react"
 import { motion } from "motion/react"
 import { OrderType } from "../pages/CheckOut"
 import { FiUser, FiPhone, FiMail } from "react-icons/fi"
@@ -12,19 +12,25 @@ type TakeawayFormData = {
     pickupTime: string
     instructions: string
 }
+type TakeawayFormProps = {
+    orderType: OrderType
+    takeawayForm: TakeawayFormData
+    setTakeawayForm: React.Dispatch<React.SetStateAction<TakeawayFormData>>
+}
 
 
-const TakeAwayForm = ({ orderType }: { orderType: OrderType }) => {
+
+const TakeAwayForm = ({ orderType, takeawayForm, setTakeawayForm }: TakeawayFormProps) => {
 
 
 
-    const [takeawayForm, setTakeawayForm] = useState<TakeawayFormData>({
-        fullName: "",
-        email: "",
-        phone: "",
-        pickupTime: "",
-        instructions: "",
-    })
+    // const [takeawayForm, setTakeawayForm] = useState<TakeawayFormData>({
+    //     fullName: "",
+    //     email: "",
+    //     phone: "",
+    //     pickupTime: "",
+    //     instructions: "",
+    // })
 
     const handleTakeawayFormChange = (field: keyof TakeawayFormData, value: string) => {
         setTakeawayForm((prev) => ({ ...prev, [field]: value }))

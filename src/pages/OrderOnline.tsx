@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { menuData } from "../utils/menu"
 import MenuCard from "../components/MenuCard"
 import ItemDetailsModal from "../components/ItemDetailsModal"
+import FloatingCart from "../components/FloatingCart"
 
 const tabs = Object.keys(menuData)
 
@@ -73,6 +74,8 @@ const OrderOnline: React.FC = () => {
                     {...selectedItem}
                 />
             </AnimatePresence>
+
+            <FloatingCart />
         </section>
     )
 }

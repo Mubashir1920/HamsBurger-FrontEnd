@@ -15,6 +15,7 @@ import { Routes, Route } from "react-router";
 import Page404 from "./pages/404";
 import ScrollToTop from "./components/ScrollToTop";
 import CheckOut from "./pages/CheckOut";
+import MaintainancePopUp from "./components/MaintainancePopUp";
 
 
 
@@ -37,6 +38,7 @@ function App() {
         </Routes>
         <Footer />
       </ReactLenis>
+      <MaintainancePopUp />
     </>
   )
 }

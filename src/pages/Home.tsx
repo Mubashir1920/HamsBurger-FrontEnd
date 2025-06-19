@@ -1,5 +1,6 @@
 
 import Deals from "../components/Deals"
+import FloatingCart from "../components/FloatingCart"
 import Gallery from "../components/Gallery"
 import HeroSlider from "../components/HeroSlider"
 import HomeMenu from "../components/HomeMenu"
@@ -17,6 +18,7 @@ const Home = () => {
             <Deals />
             <Gallery />
             <Reservation />
+            <FloatingCart />
         </main>
     )
 }

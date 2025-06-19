@@ -4,7 +4,6 @@ import Slide1 from '/assets/slide1.png';
 import Slide2 from '/assets/slide2.png';
 import Slide3 from '/assets/slide3.png';
 import { Link } from 'react-router';
-import { motion } from 'motion/react';
 
 
 type Slide = {
@@ -99,7 +98,7 @@ const HeroSlider: React.FC = () => {
                                 <p className="text-md italic mb-3">{slide.subtitle}</p>
                                 <h1 className="text-4xl tracking-wider font-bebas sm:text-6xl font-bold mb-4">{slide.title}</h1>
                                 <p className="text-base  capitalize sm:text-lg mb-6">{slide.description}</p>
-                                <Link to='/menu' className="bg-white text-black hover:bg-black duration-300 hover:text-white transition-colors px-6 py-2 font-bold  rounded-md">
+                                <Link to='/menu' className="hover:bg-white font-bebas hover:text-black bg-black duration-300 text-white transition-colors px-6 py-2 text-2xl  rounded-md">
                                     VIEW OUR FULL MENU
                                 </Link>
                             </div>

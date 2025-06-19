@@ -1,6 +1,5 @@
-"use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef } from "react"
 import { BsArrowRight } from "react-icons/bs"
 import { Link } from "react-router"
 import { useLenis } from "lenis/react"
@@ -9,11 +8,11 @@ import { CartItem } from "./CartItem"
 import { useCartContext } from "../Store/Context/CartContext"
 
 const CartSideBar = () => {
-    const sideNavRef = useRef<HTMLDivElement>(null)
-    const [active, setActive] = useState(false)
-    const lenis = useLenis()
 
-    const { cart, totalAmount, totalItem, deliveryCharges, removeFromCart } = useCartContext()
+    const { cart, active, setActive, totalAmount, deliveryCharges, removeFromCart } = useCartContext()
+
+    const sideNavRef = useRef<HTMLDivElement>(null)
+    const lenis = useLenis()
 
     const handleRemove = (id: string) => {
         removeFromCart(id)
@@ -33,6 +32,7 @@ const CartSideBar = () => {
             lenis?.start()
         }
     }, [active, lenis])
+
 
     useEffect(() => {
         const handleClickOutside = (event: any) => {
@@ -60,21 +60,10 @@ const CartSideBar = () => {
 
     return (
         <>
-            {/* Toggle Button */}
-            <button className="text-xl cursor-pointer relative">
-                <HiOutlineShoppingBag onClick={() => setActive(true)} className={` ${active ? "hidden" : "block"}`} size={28} />
-                {/* Cart Item Count Badge */}
-                {cart.length > 0 && (
-                    <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                        {typeof totalItem === "number" ? totalItem : Number.parseInt(totalItem.toString()) || 0}
-                    </span>
-                )}
-            </button>
-
             {/* Background Overlay */}
             {active && (
                 <div
-                    className="fixed top-0 left-0 w-full h-[100dvh] bg-black/50 bg-opacity-50 z-10"
+                    className="fixed top-0 left-0 w-full h-[200dvh] bg-black/50 bg-opacity-50 z-40"
                     onClick={() => setActive(false)}
                 />
             )}
@@ -82,7 +71,7 @@ const CartSideBar = () => {
             {/* Side Nav */}
             <div
                 ref={sideNavRef}
-                className={`fixed top-0 right-0 h-[100dvh] bg-black text-white text-3xl transition-transform duration-500 ease-in-out w-[80vw] sm:w-[50vw] lg:w-[35vw] px-5 z-20 ${active ? "translate-x-0" : "translate-x-full"
+                className={`fixed font-bebas z-50 top-0 right-0 h-[100dvh] bg-black text-white text-3xl transition-transform duration-500 ease-in-out w-[80vw] sm:w-[50vw] lg:w-[35vw] px-5  ${active ? "translate-x-0" : "translate-x-full"
                     }`}
                 data-lenis-prevent
             >
