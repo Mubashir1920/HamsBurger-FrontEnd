@@ -24,24 +24,9 @@ type DeliveryFormProps = {
 
 const DeliveryForm = ({ orderType, deliveryForm, setDeliveryForm }: DeliveryFormProps) => {
 
-    // const [deliveryForm, setDeliveryForm] = useState<DeliveryFormData>({
-    //     fullName: "",
-    //     email: "",
-    //     phone: "",
-    //     address: "",
-    //     city: "",
-    //     postalCode: "",
-    //     instructions: "",
-    // })
-
     const handleDeliveryFormChange = (field: keyof DeliveryFormData, value: string) => {
         setDeliveryForm((prev) => ({ ...prev, [field]: value }))
     }
-
-    // const isFormValid = () => {
-    //     deliveryForm.fullName && deliveryForm.email && deliveryForm.phone && deliveryForm.address && deliveryForm.city
-    // }
-
 
     return (
         <motion.div
@@ -67,6 +52,7 @@ const DeliveryForm = ({ orderType, deliveryForm, setDeliveryForm }: DeliveryForm
                         onChange={(e) => handleDeliveryFormChange("fullName", e.target.value)}
                         className="w-full px-3 py-2 bg-black/80 border border-white/20 rounded-lg focus:outline-none focus:border-yellow-500"
                         placeholder="Enter your full name"
+                        maxLength={30}
                     />
                 </div>
 
@@ -127,13 +113,14 @@ const DeliveryForm = ({ orderType, deliveryForm, setDeliveryForm }: DeliveryForm
                 </div>
 
                 <div>
-                    <label className="block text-sm font-medium mb-2">Postal Code</label>
+                    <label className="block text-sm font-medium mb-2">Postal Code *</label>
                     <input
                         type="text"
                         value={deliveryForm.postalCode}
                         onChange={(e) => handleDeliveryFormChange("postalCode", e.target.value)}
                         className="w-full px-3 py-2 bg-black/80 border border-white/20 rounded-lg focus:outline-none focus:border-yellow-500"
                         placeholder="Enter postal code"
+                        maxLength={6}
                     />
                 </div>
 

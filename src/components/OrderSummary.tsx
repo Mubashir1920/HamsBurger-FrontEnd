@@ -16,6 +16,8 @@ const OrderSummary = ({ orderType }: { orderType: OrderType }) => {
     const handleCartRemove = (id: string) => {
         removeFromCart(id)
     }
+
+
     return (
         <div className="lg:w-[35%] w-full ">
             <div className="sticky top-8">
@@ -25,7 +27,7 @@ const OrderSummary = ({ orderType }: { orderType: OrderType }) => {
                     {cart.length > 0 ? (
                         <>
                             {/* Cart Items */}
-                            <div className="max-h-96 overflow-y-auto space-y-4 mb-6">
+                            <div data-lenis-prevent className="max-h-96  overflow-y-auto space-y-4 mb-6">
                                 {cart.map((item) => (
                                     <CartItem
                                         key={item.id}

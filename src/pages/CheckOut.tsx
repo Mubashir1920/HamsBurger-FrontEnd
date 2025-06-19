@@ -6,6 +6,7 @@ import OrderSummary from "../components/OrderSummary"
 import DeliveryForm from "../components/DeliveryForm"
 import TakeAwayForm from "../components/TakeAwayForm"
 import PaymentForm from "../components/PaymentForm"
+import Toast from "../components/Toast"
 
 export type OrderType = "delivery" | "takeaway"
 type PaymentMethod = "cod" | "bank" | "card"
@@ -45,6 +46,7 @@ type DeliveryFormData = {
 const CheckoutPage = () => {
     const [orderType, setOrderType] = useState<OrderType>("delivery")
     const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>("cod")
+    const [isToast, setIsToast] = useState<boolean>(false)
 
     const [takeawayForm, setTakeawayForm] = useState<TakeawayFormData>({
         fullName: "",
@@ -64,6 +66,24 @@ const CheckoutPage = () => {
         instructions: "",
     })
 
+    const resetForms = () => {
+        setTakeawayForm({
+            fullName: "",
+            email: "",
+            phone: "",
+            pickupTime: "",
+            instructions: "",
+        })
+        setDeliveryForm({
+            fullName: "",
+            email: "",
+            phone: "",
+            address: "",
+            city: "",
+            postalCode: "",
+            instructions: "",
+        })
+    }
 
 
     const [paymentForm, setPaymentForm] = useState<PaymentFormData>({
@@ -76,7 +96,7 @@ const CheckoutPage = () => {
         accountNumber: "",
     })
 
-    const { cart, totalAmount, deliveryCharges } = useCartContext()
+    const { cart, totalAmount, deliveryCharges, clearCart } = useCartContext()
 
     const subtotal = typeof totalAmount === "number" ? totalAmount : Number.parseFloat(totalAmount.toString()) || 0
     const deliveryFee = orderType === "delivery" ? deliveryCharges : 0
@@ -92,19 +112,27 @@ const CheckoutPage = () => {
             cart,
             total: finalTotal,
         })
-        alert("Order submitted successfully!")
+        // Show success toast
+        setIsToast(true)
+        // Reset forms after submission
+        resetForms()
+        //Clear Cart
+        clearCart()
     }
 
     const isFormValid = () => {
         if (orderType === "delivery") {
             return (
-                deliveryForm.fullName && deliveryForm.email && deliveryForm.phone && deliveryForm.address && deliveryForm.city
+                deliveryForm.fullName && deliveryForm.email && deliveryForm.phone && deliveryForm.address && deliveryForm.city && deliveryForm.postalCode
             )
-        } else {
+        } else if (orderType === "takeaway") {
             return takeawayForm.fullName && takeawayForm.email && takeawayForm.phone && takeawayForm.pickupTime
+        } else {
+
+            return paymentForm.method === "card" && paymentForm.cardNumber && paymentForm.expiryDate && paymentForm.cvv && paymentForm.cardName
+
         }
     }
-
 
     return (
         <div className="min-h-screen  text-white">
@@ -154,7 +182,6 @@ const CheckoutPage = () => {
                             />
                         }
 
-
                         {/* Payment Options */}
                         <PaymentForm
                             orderType={orderType}
@@ -176,6 +203,14 @@ const CheckoutPage = () => {
 
                     {/* Right Side - Cart Summary */}
                     <OrderSummary orderType={orderType} />
+                    {
+                        isToast && (
+                            <Toast
+                                messageType="success"
+                                message="Order placed successfully!"
+                            />
+                        )
+                    }
                 </div>
             </div>
         </div >

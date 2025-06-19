@@ -22,25 +22,11 @@ type TakeawayFormProps = {
 
 const TakeAwayForm = ({ orderType, takeawayForm, setTakeawayForm }: TakeawayFormProps) => {
 
-
-
-    // const [takeawayForm, setTakeawayForm] = useState<TakeawayFormData>({
-    //     fullName: "",
-    //     email: "",
-    //     phone: "",
-    //     pickupTime: "",
-    //     instructions: "",
-    // })
-
     const handleTakeawayFormChange = (field: keyof TakeawayFormData, value: string) => {
         setTakeawayForm((prev) => ({ ...prev, [field]: value }))
     }
-    // const isFormValid = () => {
-    //     return takeawayForm.fullName && takeawayForm.email && takeawayForm.phone && takeawayForm.pickupTime
-    // }
 
-
-
+    const now = new Date().toISOString().slice(0, 16); // current datetime in YYYY-MM-DDTHH:MM
 
     return (
         <motion.div
@@ -103,8 +89,9 @@ const TakeAwayForm = ({ orderType, takeawayForm, setTakeawayForm }: TakeawayForm
                     <input
                         type="datetime-local"
                         value={takeawayForm.pickupTime}
+                        min={now}
                         onChange={(e) => handleTakeawayFormChange("pickupTime", e.target.value)}
-                        className="w-full px-3 py-2 bg-black/80 border border-white/20 rounded-lg focus:outline-none focus:border-yellow-500"
+                        className="custom-date-picker w-full px-3 py-2 bg-black/80 border border-white/20 rounded-lg focus:outline-none focus:border-yellow-500"
                     />
                 </div>
 

@@ -18,6 +18,7 @@ const menuItems: MenuItem[] = [
     { name: 'Menu', path: '/menu' },
     { name: 'About', path: '/aboutus' },
     { name: 'Contact', path: '/contact' },
+    { name: 'Checkout', path: '/checkout' },
 ];
 
 const MobileNav = () => {
@@ -107,7 +108,7 @@ const MobileNav = () => {
 
                     </ul>
 
-                    <Link to="/orderonline" className="absolute bottom-5 w-full" onClick={() => setActive(false)} >
+                    <Link to="/menu" className="absolute bottom-5 w-full" onClick={() => setActive(false)} >
                         <button className="bg-red-800 hover:bg-yellow-700 w-full    transition-colors duration-300 uppercase cursor-pointer px-4 py-1  tracking-wide  ">
                             Order Online
                         </button>

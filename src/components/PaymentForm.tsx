@@ -163,7 +163,7 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ orderType, paymentMethod, set
                                     <p><strong>Bank Name:</strong> JazzCash</p>
                                 </div>
                                 <br />
-                                Please transfer the total amount to our bank account and upload the receipt. You will receive
+                                Please transfer the total amount to our bank account and Send the receipt at <strong>support@hamsburger.com</strong>. You will receive
                                 order confirmation once payment is verified.
                             </p>
                         </div>
