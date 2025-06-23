@@ -73,8 +73,8 @@ function validateForm(data: FormData): FormErrors {
 
     if (!data.empId) {
         errors.empId = "Emp Id is required"
-    } else if (!/^EMP-\d{4}$/.test(data.empId)) {
-        errors.empId = "Emp Id must be in the format EMP-XXXX (e.g., EMP-0000)"
+    } else if (!/^EMP\d{4}$/.test(data.empId)) {
+        errors.empId = "Emp Id must be in the format EMPXXXX (e.g., EMP0000)"
     }
     if (!data.password) {
         errors.password = "Password is required"
@@ -222,7 +222,7 @@ function LoginForm({
                 <button
                     type="submit"
                     disabled={state.isLoading}
-                    className="w-full bg-theme-red text-white font-medium py-3"
+                    className="w-full bg-theme-red cursor-pointer text-white font-medium py-3"
                 >
                     {state.isLoading ? (
                         <motion.div
@@ -230,7 +230,7 @@ function LoginForm({
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                         >
-                            <FaSpinner className="animate-spin" />
+                            <FaSpinner className="animate-spin " />
                             <span>Signing In...</span>
                         </motion.div>
                     ) : (
@@ -267,7 +267,7 @@ export default function WaiterLogin() {
             await new Promise((resolve) => setTimeout(resolve, 2000))
 
             // Simulate authentication logic
-            if (formData.empId === "EMP-1925" && formData.password === "password123") {
+            if (formData.empId === "EMP1925" && formData.password === "password123") {
                 setSuccess(true)
                 // In a real app, you would redirect or update global state here
                 setTimeout(() => {
@@ -285,14 +285,14 @@ export default function WaiterLogin() {
     }
 
     return (
-        <div className="min-h-screen  flex items-center justify-center p-4">
+        <div className="min-h-screen bg-black  flex items-center justify-center p-4">
             <motion.div
                 className="w-full max-w-md relative z-10"
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5 }}
             >
-                <div className="bg-black backdrop-blur-sm shadow-2xl">
+                <div className="border border-white/10 rounded-md backdrop-blur-sm shadow-2xl">
                     <div className="text-center py-6 space-y-4">
 
                         <motion.div
@@ -321,7 +321,7 @@ export default function WaiterLogin() {
                                     className="text-center py-8"
                                 >
                                     <motion.div
-                                        className="mx-auto w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mb-4"
+                                        className="mx-auto w-16 h-16 bg-theme-red rounded-full flex items-center justify-center mb-4"
                                         initial={{ scale: 0 }}
                                         animate={{ scale: 1 }}
                                         transition={{ delay: 0.2, type: "spring", stiffness: 200 }}

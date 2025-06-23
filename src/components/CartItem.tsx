@@ -146,29 +146,6 @@ export function CartItem({
 
             {/* Selected Items Details */}
             {showDetails && renderSelectedItems()}
-
-            {/* Quantity Controls and Total */}
-            {/* <div className="flex items-center justify-between pt-3 border-t border-white/10 mt-3">
-   
-                <div className="flex items-center  space-x-3">
-                    <span className={` ${compact ? "text-[16px] " : "text-base"}`}>Qty:</span>
-                    <div className="flex items-center gap-5 px-3">
-                        <button onClick={() => onDecrease(id)} disabled={quantity <= 1}>
-                            <FiMinus className="cursor-pointer" size={compact ? 18 : 25} />
-                            <span className="sr-only">Decrease quantity</span>
-                        </button>
-
-                        <span className={`min-w-[2rem] text-center text-sm `}>{quantity}</span>
-
-                        <button onClick={() => onIncrease(id)}>
-                            <FiPlus className="cursor-pointer" size={compact ? 18 : 25} />
-                            <span className="sr-only">Increase quantity</span>
-                        </button>
-                    </div>
-                </div>
-
-                <div className={` text-yellow-700 text-xl`}>${totalPrice.toFixed(2)}</div>
-            </div> */}
         </div>
     )
 }

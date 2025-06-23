@@ -10,6 +10,7 @@ import { FiMinus, FiPlus } from "react-icons/fi"
 import { useCartContext } from "../Store/Context/CartContext"
 
 import type { DealItem, SizeOption } from "../utils/menu"
+import type { CartItem } from "../Store/Context/CartContext"
 import { Flavours } from "../utils/menu"
 import ExtraItems from "./Extras"
 
@@ -40,14 +41,6 @@ interface SelectedDealData {
     defaultItems: Array<{ name: string; quantity: number }>
 }
 
-interface CartItem {
-    id: string
-    name: string
-    price: number
-    quantity: number
-    image: string
-    selectedItems: any
-}
 
 const ItemDetailsModal: React.FC<ItemDetailsModalProps> = ({
     isOpen,
@@ -297,7 +290,7 @@ const ItemDetailsModal: React.FC<ItemDetailsModalProps> = ({
                                         </button>
                                     </div>
                                 </div>
-
+                                {/* For Burger Selecting to add as a Deal */}
                                 {category !== "Pizza" && category !== "Deals" && (
                                     <div className="mt-4 flex flex-col gap-2">
                                         <label className="font-semibold">Meal: </label>
@@ -311,7 +304,7 @@ const ItemDetailsModal: React.FC<ItemDetailsModalProps> = ({
                                         </select>
                                     </div>
                                 )}
-
+                                {/* For Pizza The Size Will Be Increased */}
                                 {category === "Pizza" && (
                                     <div className="mt-4 flex flex-col gap-2">
                                         <label className="font-semibold">Size:</label>
@@ -341,7 +334,7 @@ const ItemDetailsModal: React.FC<ItemDetailsModalProps> = ({
                                         ))}
                                     </div>
                                 )}
-
+                                {/* The Deals Section Covering all the Deal Items That are NotDefault  */}
                                 {category === "Deals" && dealItems.length > 0 && (
                                     <div className="mt-4 flex flex-col gap-2">
                                         {dealItems
@@ -400,7 +393,7 @@ const ItemDetailsModal: React.FC<ItemDetailsModalProps> = ({
                                                     </div>
                                                 )
                                             })}
-
+                                        {/* The Default Items that doesnt need any selection  */}
                                         <div className="mt-5 flex flex-wrap gap-2">
                                             {dealItems
                                                 .filter((item) => item.isDefault)

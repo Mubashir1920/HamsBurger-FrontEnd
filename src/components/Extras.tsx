@@ -1,4 +1,3 @@
-"use client"
 
 import { useState } from "react"
 import { Extras } from "../utils/menu"
@@ -182,8 +181,8 @@ const ExtraItems = () => {
                                 onClick={() => handleAddToCart(index)}
                                 disabled={isDisabled}
                                 className={`w-full text-center px-2 py-1 rounded text-sm font-semibold transition-colors ${isDisabled
-                                        ? "bg-gray-600 text-gray-400 cursor-not-allowed"
-                                        : "bg-yellow-700 hover:bg-yellow-600 text-white cursor-pointer"
+                                    ? "bg-gray-600 text-gray-400 cursor-not-allowed"
+                                    : "bg-yellow-700 hover:bg-yellow-600 text-white cursor-pointer"
                                     }`}
                             >
                                 Add to Cart
