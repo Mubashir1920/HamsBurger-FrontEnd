@@ -14,7 +14,6 @@ const WaiterCart = () => {
 
     const { cart, active, setActive, totalAmount, totalItem, removeFromCart } = useWaiterCartContext()
 
-
     const sideNavRef = useRef<HTMLDivElement>(null)
     const lenis = useLenis()
 
@@ -143,7 +142,7 @@ const WaiterCart = () => {
                                 <span className="text-2xl">Total:</span>
                                 <span className="text-2xl ">${finalTotal.toFixed(2)}</span>
                             </div>
-                            <Link to="/checkout" className="w-full text-[26px]" onClick={() => setActive(false)}>
+                            <Link to="/waiter-dashboard/waiter-checkout" className="w-full text-[26px]" onClick={() => setActive(false)}>
                                 <button className="bg-black text-white  w-full uppercase cursor-pointer px-4 py-2 font-light tracking-wide">
                                     PLACE ORDER ({cart.length} {cart.length === 1 ? "item" : "items"})
                                 </button>

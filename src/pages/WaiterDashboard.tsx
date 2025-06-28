@@ -10,7 +10,7 @@ const WaiterDashboard = () => {
 
         <WaiterCartProvider>
             {/* Nav Bar of the Waiter Dashboard */}
-            <nav className="bg-white border w-full  border-black/20  px-2  py-4 " >
+            <nav className="bg-white border w-full  uppercase border-black/20  px-2  py-4 " >
                 <div className="max-w-xl mx-auto flex items-center justify-between " >
                     <div>
                         <h1 className="text-2xl font-bebas bg-black">

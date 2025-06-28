@@ -30,7 +30,7 @@ const AddItemsWaitersMenu = () => {
                             <button
                                 key={tab}
                                 onClick={() => setActiveTab(tab)}
-                                className={`px-2  text-lg pb-1 border-b-2 cursor-pointer  capitalize  ${activeTab === tab ? " border-b font-medium" : "border-transparent "}`}
+                                className={`px-2 uppercase  text-lg pb-1 border-b-2 cursor-pointer ${activeTab === tab ? " border-b font-medium" : "border-transparent "}`}
                             >
                                 {tab === "ChickenBurger" ? "Chicken Burger" : tab === "BeefBurger" ? "Beef Burger" : tab}
                             </button>
@@ -45,7 +45,7 @@ const AddItemsWaitersMenu = () => {
                         className="w-full rounded-lg"
                     >
                         {menuData[activeTab]?.map((item, index) => (
-                            <div key={index} className="flex items-center justify-between p-4 border-b last:border-b-0">
+                            <div key={index} className="flex  items-center justify-between p-4 border-b last:border-b-0">
                                 <div className='w-[85%] items-center gap-4 flex'>
                                     <img className='w-20 h-20 rounded-lg' src={item.image} alt={item.title} />
                                     <div>

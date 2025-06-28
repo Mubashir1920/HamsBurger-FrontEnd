@@ -12,6 +12,8 @@ type CartItemProps = {
     selectedItems?: {
         type?: string
         name?: string
+        flavour?: string
+        option?: string
         quantity?: number
         totalPrice?: string
         sizes?: any[]
@@ -38,13 +40,13 @@ export function WaiterCartItem({
 
         return (
             <div className="mt-3 pt-3 font-poppin  border-t border-gray-200  text-sm text-black/60 ">
-                {selectedItems.sizes?.length > 0 && (
+                {selectedItems.sizes && selectedItems.sizes?.length > 0 && (
                     <div>
                         <span >Sizes: </span>
                         {selectedItems.sizes.map((size, idx) => (
                             <span key={idx} >
                                 {size.name} ({size.description})
-                                {idx < selectedItems.sizes.length - 1 ? ", " : ""}
+                                {selectedItems.sizes && idx < selectedItems.sizes.length - 1 ? ", " : ""}
                             </span>
                         ))}
                     </div>
@@ -70,14 +72,28 @@ export function WaiterCartItem({
                     </div>
                 )}
 
-                {selectedItems.defaultItems?.length > 0 && (
+                {selectedItems.flavour && (
                     <div>
-                        <span >Includes: </span>
-                        <span >
+                        <span >Flavour: </span>
+                        <span >{selectedItems.flavour}</span>
+                    </div>
+                )}
+                {selectedItems.option && (
+                    <div>
+                        <span >Option: </span>
+                        <span >{selectedItems.option}</span>
+                    </div>
+                )}
+
+
+                {selectedItems.defaultItems && selectedItems.defaultItems?.length > 0 && (
+                    <div>
+                        <span>Includes: </span>
+                        <span>
                             {selectedItems.defaultItems.map((item, idx) => (
                                 <span key={idx}>
                                     {item.quantity}x {item.name}
-                                    {idx < selectedItems.defaultItems.length - 1 ? ", " : ""}
+                                    {selectedItems.defaultItems && idx < selectedItems.defaultItems.length - 1 ? ", " : ""}
                                 </span>
                             ))}
                         </span>
@@ -109,14 +125,18 @@ export function WaiterCartItem({
                             <div className="  text-base mt-1">
                                 ${price.toFixed(2)}
                             </div>
-                            {selectedItems && (
+                            {selectedItems?.mealType === 'combo' || selectedItems?.flavour || selectedItems?.option
+                                || (selectedItems?.selectedFlavours && Object.keys(selectedItems.selectedFlavours).length > 0)
+                                || (selectedItems?.defaultItems && selectedItems.defaultItems.length > 0) ||
+                                (selectedItems?.sizes && selectedItems.sizes.length > 0) ? (
                                 <button
                                     onClick={() => setShowDetails(!showDetails)}
-                                    className="text-[16px] mt-1  underline hover:"
+                                    className={`mt-1 underline text-sm tracking-wide `}
                                 >
                                     {showDetails ? "Hide details" : "Show details"}
                                 </button>
-                            )}
+                            ) : null}
+
                         </div>
 
                         <button

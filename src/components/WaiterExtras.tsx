@@ -67,7 +67,7 @@ const WaiterExtras = () => {
                 option: selection?.option,
             },
         }
-
+        // console.log(cartItem);
         addToCart(cartItem)
 
         // Optional: Reset the selection for this extra after adding to cart
@@ -132,14 +132,14 @@ const WaiterExtras = () => {
 
                                 {/* Dropdowns */}
                                 <div className="flex flex-col sm:flex-row gap-2 flex-grow min-w-0">
-                                    {extra.flavour?.length > 0 && (
+                                    {extra.flavour && extra.flavour?.length > 0 && (
                                         <select
                                             className="w-full sm:flex-1 min-w-0 bg-white border border-black/20 text-sm px-3 py-2 rounded text-black focus:outline-none"
                                             value={selection?.flavour || ""}
                                             onChange={(e) => handleFlavourChange(index, e.target.value)}
                                         >
                                             <option value="" disabled>Select Flavour</option>
-                                            {extra.flavour.map((opt, i) => (
+                                            {extra.flavour?.map((opt, i) => (
                                                 <option key={i} value={opt}>{opt}</option>
                                             ))}
                                         </select>

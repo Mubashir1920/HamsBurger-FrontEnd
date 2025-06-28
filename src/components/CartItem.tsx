@@ -13,6 +13,8 @@ type CartItemProps = {
     selectedItems?: {
         type?: string
         name?: string
+        flavour?: string
+        option?: string
         quantity?: number
         totalPrice?: string
         sizes?: any[]
@@ -41,7 +43,7 @@ export function CartItem({
         if (!selectedItems) return null
 
         return (
-            <div className="mt-3 pt-3 border-t border-white/10 space-y-2">
+            <div className="mt-3 pt-3 text-sm font-poppin border-t border-white/10 space-y-2">
                 {/* Pizza sizes */}
                 {selectedItems.sizes && selectedItems.sizes.length > 0 && (
                     <div className={`${compact ? "text-[14px]" : "text-sm"}`}>
@@ -61,6 +63,20 @@ export function CartItem({
                         <span className="text-yellow-700 capitalize">
                             Fries + Drink 500ml (Combo)
                         </span>
+                    </div>
+                )}
+
+                {/* For Extras */}
+                {selectedItems.flavour && (
+                    <div>
+                        <span >Flavour: </span>
+                        <span >{selectedItems.flavour}</span>
+                    </div>
+                )}
+                {selectedItems.option && (
+                    <div>
+                        <span >Option: </span>
+                        <span >{selectedItems.option}</span>
                     </div>
                 )}
 
@@ -122,14 +138,18 @@ export function CartItem({
                             <div className={`text-yellow-700  ${compact ? "text-[20px] " : "text-lg"} mt-2`}>${price.toFixed(2)}</div>
 
                             {/* Show details toggle for complex items */}
-                            {selectedItems && (
+                            {selectedItems?.mealType === 'combo' || selectedItems?.flavour || selectedItems?.option
+                                || (selectedItems?.selectedFlavours && Object.keys(selectedItems.selectedFlavours).length > 0)
+                                || (selectedItems?.defaultItems && selectedItems.defaultItems.length > 0) ||
+                                (selectedItems?.sizes && selectedItems.sizes.length > 0) ? (
                                 <button
                                     onClick={() => setShowDetails(!showDetails)}
-                                    className={` mt-1 underline text-sm tracking-wide`}
+                                    className={`mt-1 underline text-sm tracking-wide ${compact ? "text-[14px]" : "text-sm"}`}
                                 >
                                     {showDetails ? "Hide details" : "Show details"}
                                 </button>
-                            )}
+                            ) : null}
+
                         </div>
 
                         {/* Remove button */}

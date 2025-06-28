@@ -19,12 +19,13 @@ import CheckOut from "./pages/CheckOut";
 import WaiterDashboard from './pages/WaiterDashboard';
 import AddItemsWaitersMenu from './components/AddItemsWaitersMenu';
 import WaiterOrderList from './components/WaiterOrderList';
+import WaiterCheckout from './components/WaiterCheckout';
 
 
 function App() {
   const location = useLocation();
 
-  const noLayoutRoutes = ["/login", "/checkout", "/waiter-dashboard", "/waiter-dashboard/additem", "/waiter-dashboard/order-list"];
+  const noLayoutRoutes = ["/login", "/checkout", "/waiter-dashboard", "/waiter-dashboard/additem", "/waiter-dashboard/order-list", "/waiter-dashboard/waiter-checkout"];
   const isLayoutHidden = noLayoutRoutes.includes(location.pathname);
 
   return (
@@ -44,6 +45,7 @@ function App() {
         <Route path="/waiter-dashboard" element={<WaiterDashboard />} >
           <Route path="additem" element={<AddItemsWaitersMenu />} />
           <Route path="order-list" element={<WaiterOrderList />} />
+          <Route path="waiter-checkout" element={<WaiterCheckout />} />
         </Route>
         <Route path="/*" element={<Page404 />} />
       </Routes>

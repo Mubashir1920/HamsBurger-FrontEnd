@@ -14,6 +14,8 @@ export type CartItem = {
     selectedItems?: {
         type?: string
         name?: string
+        flavour?: string
+        option?: string
         quantity?: number
         totalPrice?: string
         sizes?: any[]
