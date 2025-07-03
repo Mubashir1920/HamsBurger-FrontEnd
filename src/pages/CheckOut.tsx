@@ -7,22 +7,12 @@ import DeliveryForm from "../components/DeliveryForm"
 import TakeAwayForm from "../components/TakeAwayForm"
 import PaymentForm from "../components/PaymentForm"
 import Toast from "../components/Toast"
+import { Link } from "react-router"
+
+
 
 export type OrderType = "delivery" | "takeaway"
-type PaymentMethod = "cod" | "bank" | "card"
-
-
-type PaymentFormData = {
-    method: PaymentMethod
-    // Card details
-    cardNumber: string
-    expiryDate: string
-    cvv: string
-    cardName: string
-    // Bank transfer details
-    bankName: string
-    accountNumber: string
-}
+export type PaymentMethod = "cod" | "bank"
 
 
 type TakeawayFormData = {
@@ -44,8 +34,12 @@ type DeliveryFormData = {
 }
 
 const CheckoutPage = () => {
+
+    // Order or Takeaway
     const [orderType, setOrderType] = useState<OrderType>("delivery")
     const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>("cod")
+    // Order is Success or Failure Toast
+    const [isOrderSuccess, setIsOrderSuccess] = useState<boolean>(false)
     const [isToast, setIsToast] = useState<boolean>(false)
 
     const [takeawayForm, setTakeawayForm] = useState<TakeawayFormData>({
@@ -86,16 +80,6 @@ const CheckoutPage = () => {
     }
 
 
-    const [paymentForm, setPaymentForm] = useState<PaymentFormData>({
-        method: "cod",
-        cardNumber: "",
-        expiryDate: "",
-        cvv: "",
-        cardName: "",
-        bankName: "",
-        accountNumber: "",
-    })
-
     const { cart, totalAmount, deliveryCharges, clearCart } = useCartContext()
 
     const subtotal = typeof totalAmount === "number" ? totalAmount : Number.parseFloat(totalAmount.toString()) || 0
@@ -103,21 +87,47 @@ const CheckoutPage = () => {
     const finalTotal = subtotal + deliveryFee
 
     const handleSubmitOrder = () => {
-        // Handle order submission logic here
-        console.log("Order submitted:", {
+        const formData = orderType === "delivery" ? deliveryForm : takeawayForm;
+        const orderId = `ORD-${Date.now()}`
+
+        const placedOrder = {
             orderType,
-            deliveryForm: orderType === "delivery" ? deliveryForm : null,
-            takeawayForm: orderType === "takeaway" ? takeawayForm : null,
-            paymentForm,
+            orderId,
+            formData,
+            paymentMethod,
             cart,
             total: finalTotal,
+        }
+
+        fetch("http://localhost:3000/api/order/add", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(placedOrder),
         })
-        // Show success toast
-        setIsToast(true)
-        // Reset forms after submission
-        resetForms()
-        //Clear Cart
-        clearCart()
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error("Network response was not ok")
+                }
+                return response.json()
+            })
+            .then((data) => {
+                console.log("Order placed successfully:", data)
+                // Show success toast
+                setIsToast(true)
+                setIsOrderSuccess(true)
+                // Clear cart and reset forms
+                clearCart()
+                resetForms()
+            })
+            .catch((error) => {
+                console.error("Error placing order:", error)
+                // Show error toast
+                setIsToast(true)
+                setIsOrderSuccess(false)
+            })
+
     }
 
     const isFormValid = () => {
@@ -127,16 +137,20 @@ const CheckoutPage = () => {
             )
         } else if (orderType === "takeaway") {
             return takeawayForm.fullName && takeawayForm.email && takeawayForm.phone && takeawayForm.pickupTime
-        } else {
-
-            return paymentForm.method === "card" && paymentForm.cardNumber && paymentForm.expiryDate && paymentForm.cvv && paymentForm.cardName
-
         }
     }
 
     return (
-        <div className="min-h-screen  text-white">
-            <div className="container mx-auto px-4 py-8">
+        <div className="min-h-screen  text-white ">
+            <div className="text-center bg-black py-6">
+                <h1 className="text-2xl font-bebas bg-black">
+                    <Link to='/'>
+                        <span className="leading-none px-1">HAMS</span>
+                        <span className="bg-theme-red px-1">BURGERS</span>
+                    </Link>
+                </h1>
+            </div>
+            <div className="container mx-auto px-4 py-8 ">
                 <h1 className="text-4xl mb-5 md:text-6xl font-bebas uppercase">CHECKOUT</h1>
                 <div className="flex flex-col-reverse justify-between lg:flex-row gap-8">
                     {/* Left Side - Forms */}
@@ -187,8 +201,6 @@ const CheckoutPage = () => {
                             orderType={orderType}
                             paymentMethod={paymentMethod}
                             setPaymentMethod={setPaymentMethod}
-                            paymentForm={paymentForm}
-                            setPaymentForm={setPaymentForm}
                         />
 
                         {/* Submit Button */}
@@ -203,14 +215,20 @@ const CheckoutPage = () => {
 
                     {/* Right Side - Cart Summary */}
                     <OrderSummary orderType={orderType} />
-                    {
-                        isToast && (
+
+                    {isToast ? (
+                        isOrderSuccess ?
                             <Toast
                                 messageType="success"
                                 message="Order placed successfully!"
+                            /> :
+                            <Toast
+                                messageType="failure"
+                                message="Failed To Place Order Try Again!"
                             />
-                        )
-                    }
+                    ) : (
+                        ''
+                    )}
                 </div>
             </div>
         </div >

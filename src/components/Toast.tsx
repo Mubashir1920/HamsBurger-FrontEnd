@@ -30,7 +30,7 @@ const Toast: React.FC<ToastProps> = ({ messageType, message }) => {
                     exit={{ opacity: 0, y: -30 }}
                     transition={{ duration: 0.4 }}
                     className={`flex fixed top-5 right-4 z-[56] items-center gap-3 px-4 py-3 rounded-xl shadow-md transition-all duration-300
-          ${isSuccess ? "bg-green-600/50 backdrop-blur-2xl text-white" : "bg-red-500 text-white"}`}
+          ${isSuccess ? "bg-green-600/50 backdrop-blur-2xl text-white" : "bg-red-500/50 text-white"}`}
                 >
                     {isSuccess ? (
                         <FaCheckCircle size={20} />

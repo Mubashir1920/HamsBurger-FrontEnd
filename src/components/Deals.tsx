@@ -1,44 +1,11 @@
 import DealCard from './DealCard';
-import Image1 from '/assets/discount_dish.png';
-import Image2 from '/assets/discount_dish2.png';
-import Image3 from '/assets/discount_dish3.png';
 import bgImage from '/assets/banner_bg.png'
 import DiscountIcon from '/assets/dicount_icon.png';
+import { menuData } from '../utils/menu';
 
 
 const Deals = () => {
-    const cards = [
-        {
-            discountText: '35% OFF',
-            title: 'CHICHA MORADA',
-            description:
-                'Bacon, chorizo, roasted roma toma with mushrooms & spinach. Beef, Eggs, poached, fried.',
-            currentPrice: '$25.00',
-            originalPrice: '$50.00',
-            buttonText: 'ORDER NOW',
-            image: Image1,
-        },
-        {
-            discountText: '25% OFF',
-            title: 'TACOS AL PASTOR',
-            description:
-                'Pork marinated in spices, grilled pineapple, onions & cilantro on corn tortillas.',
-            currentPrice: '$15.00',
-            originalPrice: '$20.00',
-            buttonText: 'ORDER NOW',
-            image: Image2,
-        },
-        {
-            discountText: '40% OFF',
-            title: 'PAELLA MARINERA',
-            description:
-                'Seafood rice with shrimp, clams, mussels, saffron & fresh herbs cooked to perfection.',
-            currentPrice: '$30.00',
-            originalPrice: '$50.00',
-            buttonText: 'ORDER NOW',
-            image: Image3,
-        },
-    ];
+    const cards = menuData.Deals.slice(0, 3)
 
     return (
         <section style={{ background: `url(${bgImage})`, backgroundAttachment: 'fixed' }} className="py-12 px-4 bg-gray-100">
@@ -50,7 +17,7 @@ const Deals = () => {
                         <img src={DiscountIcon} alt="discount" className='h-full w-full' />
                     </div>
                     {cards.map((card, index) => (
-                        <DealCard key={index} {...card} />
+                        <DealCard key={index} card={card} />
                     ))}
                 </div>
             </div>

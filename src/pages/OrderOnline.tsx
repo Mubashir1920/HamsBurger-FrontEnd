@@ -5,14 +5,15 @@ import { menuData } from "../utils/menu"
 import MenuCard from "../components/MenuCard"
 import ItemDetailsModal from "../components/ItemDetailsModal"
 import FloatingCart from "../components/FloatingCart"
+import ExtraItems from "../components/Extras"
 
-const tabs = Object.keys(menuData)
+const menutabs = Object.keys(menuData);
+const tabs = [...menutabs, 'Extras']
 
 const OrderOnline: React.FC = () => {
     const [activeTab, setActiveTab] = useState<string>(tabs[0])
     const [selectedItem, setSelectedItem] = useState<any | null>(null)
     const [selectedCategory, setSelectedCategory] = useState<string>("")
-
 
     const handleCardClick = (item: any) => {
         setSelectedItem(item)
@@ -62,6 +63,9 @@ const OrderOnline: React.FC = () => {
                     {menuData[activeTab]?.map((item, index) => (
                         <MenuCard key={index} {...item} onClick={() => handleCardClick(item)} />
                     ))}
+                    {activeTab === 'Extras' && (
+                        <ExtraItems />
+                    )}
                 </motion.div>
             </AnimatePresence>
 

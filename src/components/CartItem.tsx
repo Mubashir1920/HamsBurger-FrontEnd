@@ -144,7 +144,7 @@ export function CartItem({
                                 (selectedItems?.sizes && selectedItems.sizes.length > 0) ? (
                                 <button
                                     onClick={() => setShowDetails(!showDetails)}
-                                    className={`mt-1 underline text-sm tracking-wide ${compact ? "text-[14px]" : "text-sm"}`}
+                                    className={`mt-1 cursor-pointer underline text-sm tracking-wide ${compact ? "text-[14px]" : "text-sm"}`}
                                 >
                                     {showDetails ? "Hide details" : "Show details"}
                                 </button>

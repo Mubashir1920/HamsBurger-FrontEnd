@@ -4,7 +4,7 @@ import { FaTrash, FaUser, FaTable, FaCreditCard, FaReceipt } from "react-icons/f
 import { useWaiterCartContext } from "../Store/Context/WaiterCartContext"
 
 type OrderForm = {
-    orderType: "Dine-In" | "Takeaway" | "Delivery"
+    orderType: "dinein" | "takeaway" | "delivery"
     empId: string
     empName: string
     tableNo: string
@@ -21,7 +21,7 @@ const WaiterCheckoutForm = (): ReactElement => {
     const { cart, totalAmount, totalItem, removeFromCart, clearCart } = useWaiterCartContext()
 
     const [formData, setFormData] = useState<OrderForm>({
-        orderType: "Dine-In",
+        orderType: "dinein",
         empId: "EMP001",
         empName: "John Doe",
         tableNo: "T-05",
@@ -60,10 +60,10 @@ const WaiterCheckoutForm = (): ReactElement => {
             orderItems: cart,
             billing: {
                 ...formData.billing,
-                subtotal: calculatedBilling.subtotal,
-                taxAmount: calculatedBilling.taxAmount,
-                totalAmount: calculatedBilling.finalTotal,
-            }
+            },
+            subtotal: calculatedBilling.subtotal,
+            taxAmount: calculatedBilling.taxAmount,
+            totalAmount: calculatedBilling.finalTotal,
         }
         console.log("Order Data:", orderData)
         clearCart()
@@ -90,9 +90,9 @@ const WaiterCheckoutForm = (): ReactElement => {
                             onChange={(e) => setFormData((prev) => ({ ...prev, orderType: e.target.value as any }))}
                             className="w-full p-3 border border-gray-300 rounded-md  "
                         >
-                            <option value="Dine-In">Dine-In</option>
-                            <option value="Takeaway">Takeaway</option>
-                            <option value="Delivery">Delivery</option>
+                            <option value="dinein">dinein</option>
+                            <option value="takeaway">takeaway</option>
+                            <option value="delivery">delivery</option>
                         </select>
                     </div>
 

@@ -13,10 +13,10 @@ const WaiterDashboard = () => {
             <nav className="bg-white border w-full  uppercase border-black/20  px-2  py-4 " >
                 <div className="max-w-xl mx-auto flex items-center justify-between " >
                     <div>
-                        <h1 className="text-2xl font-bebas bg-black">
+                        <Link to='/' className="text-2xl font-bebas bg-black">
                             <span className="leading-none px-1">HAMS</span>
                             <span className="bg-theme-red px-1">BURGERS</span>
-                        </h1>
+                        </Link>
                     </div>
                     <div className="flex text-black justify-between gap-5" >
                         <Link className={`${pathname === "/waiter-dashboard/additem" ? "font-semibold border-b" : "border-transparent font-normal"}`} to="/waiter-dashboard/additem">
