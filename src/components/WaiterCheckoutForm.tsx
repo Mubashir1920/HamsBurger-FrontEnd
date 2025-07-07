@@ -2,6 +2,10 @@ import type { ReactElement } from "react"
 import { useState, useEffect } from "react"
 import { FaTrash, FaUser, FaTable, FaCreditCard, FaReceipt } from "react-icons/fa"
 import { useWaiterCartContext } from "../Store/Context/WaiterCartContext"
+import { placeOrder } from "../utils/placeOrder"
+import { AiOutlineLoading3Quarters } from "react-icons/ai"
+import Toast from "../components/Toast";
+
 
 type OrderForm = {
     orderType: "dinein" | "takeaway" | "delivery"
@@ -13,12 +17,28 @@ type OrderForm = {
     billing: {
         discountAmount: number
         paymentStatus: "Paid" | "Unpaid" | "Partial"
-        paymentMethod: string | null
     }
+    paymentMethod: string | null
 }
 
 const WaiterCheckoutForm = (): ReactElement => {
     const { cart, totalAmount, totalItem, removeFromCart, clearCart } = useWaiterCartContext()
+    const [loading, setLoading] = useState<boolean>(false);
+
+
+    // Toast Message
+    const [toast, setToast] = useState<{ show: boolean; type: "success" | "failure"; message: string }>({
+        show: false,
+        type: "success",
+        message: "",
+    });
+    const showToast = (type: "success" | "failure", message: string) => {
+        setToast({ show: true, type, message });
+        setTimeout(() => {
+            setToast(prev => ({ ...prev, show: false }));
+        }, 3000);
+    };
+
 
     const [formData, setFormData] = useState<OrderForm>({
         orderType: "dinein",
@@ -30,8 +50,8 @@ const WaiterCheckoutForm = (): ReactElement => {
         billing: {
             discountAmount: 0,
             paymentStatus: "Unpaid",
-            paymentMethod: "cash",
         },
+        paymentMethod: "cash",
     })
 
     const [calculatedBilling, setCalculatedBilling] = useState({
@@ -42,7 +62,7 @@ const WaiterCheckoutForm = (): ReactElement => {
 
     useEffect(() => {
         const subtotal: number = Number(totalAmount)
-        const taxRate: number = formData.billing.paymentMethod === "card" ? 0.05 : 0.16
+        const taxRate: number = formData.paymentMethod === "card" ? 0.05 : 0.16
         const taxAmount: number = subtotal * taxRate
         const finalTotal: number = subtotal + taxAmount - formData.billing.discountAmount
 
@@ -51,23 +71,39 @@ const WaiterCheckoutForm = (): ReactElement => {
             taxAmount: Number(taxAmount.toFixed(2)),
             finalTotal: Number(finalTotal.toFixed(2)),
         })
-    }, [totalAmount, formData.billing.discountAmount, formData.billing.paymentMethod])
+    }, [totalAmount, formData.billing.discountAmount, formData.paymentMethod])
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
         const orderData = {
-            ...formData,
-            orderItems: cart,
+            orderType: formData.orderType,
+            orderId: formData.orderId,
+            empId: formData.empId,
+            empName: formData.empName,
+            tableNo: formData.tableNo,
+            status: formData.status,
             billing: {
                 ...formData.billing,
+                subtotal: calculatedBilling.subtotal,
+                taxAmount: calculatedBilling.taxAmount,
+                totalAmount: calculatedBilling.finalTotal,
             },
-            subtotal: calculatedBilling.subtotal,
-            taxAmount: calculatedBilling.taxAmount,
-            totalAmount: calculatedBilling.finalTotal,
+            paymentMethod: formData.paymentMethod,
+            cart,
         }
-        console.log("Order Data:", orderData)
-        clearCart()
-        alert("Order submitted successfully!")
+
+        try {
+            const res = await placeOrder(orderData)
+
+            console.log("Order Placed: ", res);
+            showToast("success", "Order placed successfully!");
+            clearCart();
+        } catch (error) {
+            console.error("Error placing order", error);
+            showToast("failure", "Failed to place order. Try again!");
+        } finally {
+            setLoading(false);
+        }
     }
 
     const handleRemoveItem = (id: string) => {
@@ -235,7 +271,8 @@ const WaiterCheckoutForm = (): ReactElement => {
                                                         <span >Sizes: </span>
                                                         {item.selectedItems.sizes.map((size, idx) => (
                                                             <span key={idx} >
-                                                                {size.name} ({size.description}){idx < item.selectedItems.sizes!.length - 1 ? ", " : ""}
+                                                                {size.name} ({size.description})
+                                                                {/* {idx < item.selectedItems.sizes!.length - 1 ? ", " : ""} */}
                                                             </span>
                                                         ))}
                                                     </div>
@@ -314,11 +351,10 @@ const WaiterCheckoutForm = (): ReactElement => {
                         <div>
                             <label className="block text-sm font-medium mb-1">Payment Method</label>
                             <select
-                                value={formData.billing.paymentMethod || "cash"}
+                                value={formData.paymentMethod || "cash"}
                                 onChange={(e) =>
                                     setFormData((prev) => ({
-                                        ...prev,
-                                        billing: { ...prev.billing, paymentMethod: e.target.value || null },
+                                        ...prev, paymentMethod: e.target.value || null
                                     }))
                                 }
                                 className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500  bg-white"
@@ -355,7 +391,7 @@ const WaiterCheckoutForm = (): ReactElement => {
                                 <span>${calculatedBilling.subtotal.toFixed(2)}</span>
                             </div>
                             <div className="flex justify-between">
-                                <span>Tax ({formData.billing.paymentMethod === "card" ? "5%" : "16%"}):</span>
+                                <span>Tax ({formData.paymentMethod === "card" ? "5%" : "16%"}):</span>
                                 <span>${calculatedBilling.taxAmount.toFixed(2)}</span>
                             </div>
                             <div className="flex justify-between">
@@ -369,7 +405,7 @@ const WaiterCheckoutForm = (): ReactElement => {
                             </div>
                             <div className="text-xs mt-2">Total Items in Cart: {totalItem}</div>
                             <div className="text-xs mt-1">
-                                Payment Method: {formData.billing.paymentMethod === "card" ? "Card (5% Tax)" : "Cash (16% Tax)"}
+                                Payment Method: {formData.paymentMethod === "card" ? "Card (5% Tax)" : "Cash (16% Tax)"}
                             </div>
                         </div>
                     </div>
@@ -380,11 +416,23 @@ const WaiterCheckoutForm = (): ReactElement => {
                 <button
                     type="submit"
                     disabled={cart.length === 0}
-                    className="flex-1 bg-black w-full text-white cursor-pointer py-3 px-6 rounded-md hover:bg-black/70 transition-colors font-semibold disabled:bg-gray-400 disabled:cursor-not-allowed"
+                    className="flex-1 bg-black w-full text-white cursor-pointer py-3 px-6 rounded-md hover:bg-black/90 transition-colors font-semibold disabled:bg-gray-400 disabled:cursor-not-allowed"
                 >
-                    Submit Order ({cart.length} items)
+                    {loading ?
+                        <span>
+                            <AiOutlineLoading3Quarters className="animate-spin mr-2 inline-block" size={20} />
+                            Placing Order
+                        </span>
+                        :
+                        <span>
+                            Submit Order ({cart.length} items)
+                        </span>
+                    }
                 </button>
             </div>
+            {toast.show && (
+                <Toast messageType={toast.type} showToast={toast.show} message={toast.message} />
+            )}
         </form >
     )
 }

@@ -2,18 +2,10 @@
 // import { useState } from "react"
 import { motion } from "motion/react"
 import { OrderType } from "../pages/CheckOut"
+import { type DeliveryFormData } from '../pages/CheckOut'
+
 import { FiMapPin, FiUser, FiPhone, FiMail } from "react-icons/fi"
 
-
-type DeliveryFormData = {
-    fullName: string
-    email: string
-    phone: string
-    address: string
-    city: string
-    postalCode: string
-    instructions: string
-}
 
 type DeliveryFormProps = {
     orderType: OrderType
@@ -83,20 +75,18 @@ const DeliveryForm = ({ orderType, deliveryForm, setDeliveryForm }: DeliveryForm
                         placeholder="Enter your phone number"
                     />
                 </div>
-
                 <div>
-                    <label className="block text-sm font-medium mb-2">
-                        <FiMapPin className="inline mr-2" />
-                        City *
-                    </label>
+                    <label className="block text-sm font-medium mb-2">Postal Code *</label>
                     <input
                         type="text"
-                        value={deliveryForm.city}
-                        onChange={(e) => handleDeliveryFormChange("city", e.target.value)}
+                        value={deliveryForm.postalCode}
+                        onChange={(e) => handleDeliveryFormChange("postalCode", e.target.value)}
                         className="w-full px-3 py-2 bg-black/80 border border-white/20 rounded-lg focus:outline-none focus:border-yellow-500"
-                        placeholder="Enter your city"
+                        placeholder="Enter postal code"
+                        maxLength={6}
                     />
                 </div>
+
 
                 <div className="md:col-span-2">
                     <label className="block text-sm font-medium mb-2">
@@ -112,17 +102,7 @@ const DeliveryForm = ({ orderType, deliveryForm, setDeliveryForm }: DeliveryForm
                     />
                 </div>
 
-                <div>
-                    <label className="block text-sm font-medium mb-2">Postal Code *</label>
-                    <input
-                        type="text"
-                        value={deliveryForm.postalCode}
-                        onChange={(e) => handleDeliveryFormChange("postalCode", e.target.value)}
-                        className="w-full px-3 py-2 bg-black/80 border border-white/20 rounded-lg focus:outline-none focus:border-yellow-500"
-                        placeholder="Enter postal code"
-                        maxLength={6}
-                    />
-                </div>
+
 
                 <div className="md:col-span-2">
                     <label className="block text-sm font-medium mb-2">Special Instructions</label>

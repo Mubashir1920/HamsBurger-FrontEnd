@@ -23,10 +23,15 @@ import WaiterCheckout from './components/WaiterCheckout';
 
 
 function App() {
-  const location = useLocation();
 
-  const noLayoutRoutes = ["/login", "/checkout", "/waiter-dashboard", "/waiter-dashboard/additem", "/waiter-dashboard/order-list", "/waiter-dashboard/waiter-checkout"];
-  const isLayoutHidden = noLayoutRoutes.includes(location.pathname);
+  const location = useLocation();
+  const noLayoutRoutes = [
+    "/login",
+  ];
+  const isLayoutHidden =
+    noLayoutRoutes.includes(location.pathname) ||
+    location.pathname.startsWith("/waiter-dashboard");
+
 
   return (
     <ReactLenis root options={{ smoothWheel: true, touchMultiplier: 1 }}>

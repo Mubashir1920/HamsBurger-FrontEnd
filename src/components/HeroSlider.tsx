@@ -98,7 +98,7 @@ const HeroSlider: React.FC = () => {
                                 <p className="text-md italic mb-3">{slide.subtitle}</p>
                                 <h1 className="text-4xl tracking-wider font-bebas sm:text-6xl font-bold mb-4">{slide.title}</h1>
                                 <p className="text-base  capitalize sm:text-lg mb-6">{slide.description}</p>
-                                <Link to='/menu' className="hover:bg-white font-bebas hover:text-black bg-black duration-300 text-white transition-colors px-6 py-2 text-2xl  rounded-md">
+                                <Link to='/menu' className="hover:bg-black font-bebas hover:text-white bg-white duration-300 text-black transition-colors px-6 py-2 text-2xl  rounded-md">
                                     VIEW OUR FULL MENU
                                 </Link>
                             </div>
