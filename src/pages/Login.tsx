@@ -356,7 +356,7 @@ export default function WaiterLogin() {
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.5, delay: 0.6 }}
                 >
-                    <p className="text-gray-400 text-sm">Demo credentials: waiter@restaurant.com / password123</p>
+                    <p className="text-gray-400 text-sm">Demo credentials: EMP1925 / password123</p>
                 </motion.div>
             </motion.div>
         </div>

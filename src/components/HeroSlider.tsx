@@ -57,7 +57,7 @@ const HeroSlider: React.FC = () => {
     return (
         <section className='relative h-[100dvh]  text-white' >
 
-            <div className="absolute -left-40 top-1/2  -rotate-90  font-semibold flex  gap-2 text-sm  z-20">
+            <div className=" hidden absolute -left-40 top-1/2  -rotate-90  font-semibold md:flex  gap-2 text-sm  z-20">
                 <div className="flex items-center gap-2">
                     <FaFacebookF /> Facebook
                 </div>
@@ -72,7 +72,7 @@ const HeroSlider: React.FC = () => {
                 </div>
             </div>
 
-            <div className="absolute text-sm -right-36 top-1/2 rotate-90   font-semibold flex items-center gap-2   z-20 text-right">
+            <div className="absolute text-sm -right-36 top-1/2 rotate-90   font-semibold hidden md:flex items-center gap-2   z-20 text-right">
                 <div>Mon - Fri: 8AM - 9PM</div>
                 <div className="border-t border-gray-400 w-8 mx-auto"></div>
                 <div>Sat - Sun: 8AM - 11PM</div>

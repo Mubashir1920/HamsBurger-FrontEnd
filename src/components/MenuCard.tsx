@@ -13,7 +13,6 @@ const MenuCard: React.FC<MenuCardProps> = ({ image, title, desc, price, onClick 
     <div
       className="w-full max-w-sm sm:max-w-md md:max-w-[45%] lg:max-w-[30%] bg-black text-white flex flex-col text-left font-bebas rounded-2xl p-4 sm:p-6 gap-4 justify-between relative shadow-md"
     >
-
       {/* Image */}
       <div className="w-full h-48 sm:h-56 md:h-[20rem] rounded-lg overflow-hidden">
         <img
@@ -37,7 +36,7 @@ const MenuCard: React.FC<MenuCardProps> = ({ image, title, desc, price, onClick 
       {/* Add to Cart Button */}
       <button
         onClick={onClick}
-        className="mt-4 bg-theme-red hover:bg-yellow-700 cursor-pointer uppercase font-semibold text-white font-poppin py-2 px-4 rounded-md transition-all duration-200 ease-in-out"
+        className="bg-theme-red hover:bg-yellow-700 cursor-pointer uppercase font-semibold text-white font-poppin py-2 px-4 rounded-md transition-all duration-200 ease-in-out"
       >
         Add to Cart
       </button>

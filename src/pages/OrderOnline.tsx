@@ -32,7 +32,7 @@ const OrderOnline: React.FC = () => {
     }
 
     return (
-        <section className=" container mx-auto  justify-center py-16 px-4">
+        <section className=" container mx-auto justify-center py-16 px-4">
             <h2 className="text-4xl md:text-6xl font-bebas uppercase">ORDER ONLINE OR TAKEAWAY</h2>
             <p>
                 Our Delicious Food Filled With Yummy taste and Love at Your Doorsteps. Order Now

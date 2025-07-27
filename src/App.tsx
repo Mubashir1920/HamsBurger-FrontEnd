@@ -6,7 +6,7 @@ import { useLocation } from "react-router";
 import Navbar from "./components/Navbar"
 import Footer from "./components/Footer"
 import ScrollToTop from "./components/ScrollToTop";
-import MaintainancePopUp from "./components/MaintainancePopUp";
+// import MaintainancePopUp from "./components/MaintainancePopUp";
 
 import Home from "./pages/Home";
 // import Menu from "./pages/Menu";

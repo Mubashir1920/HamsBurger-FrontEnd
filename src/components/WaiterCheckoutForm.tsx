@@ -266,17 +266,18 @@ const WaiterCheckoutForm = (): ReactElement => {
                                                         <span className="font-medium">Meal:</span> {item.selectedItems.mealType}
                                                     </div>
                                                 )}
-                                                {item.selectedItems.sizes && item.selectedItems.sizes.length > 0 && (
+                                                {item.selectedItems?.sizes && item.selectedItems?.sizes.length > 0 && (
                                                     <div>
-                                                        <span >Sizes: </span>
-                                                        {item.selectedItems.sizes.map((size, idx) => (
-                                                            <span key={idx} >
+                                                        <span>Sizes: </span>
+                                                        {item.selectedItems?.sizes.map((size, idx) => (
+                                                            <span key={idx}>
                                                                 {size.name} ({size.description})
-                                                                {/* {idx < item.selectedItems.sizes!.length - 1 ? ", " : ""} */}
+                                                                {idx < item.selectedItems!.sizes!.length - 1 ? ", " : ""}
                                                             </span>
                                                         ))}
                                                     </div>
                                                 )}
+
                                                 {item.selectedItems.selectedFlavours && Object.keys(item.selectedItems.selectedFlavours).length > 0 && (
                                                     <div className={` flex `}>
                                                         <span >Selections: </span>

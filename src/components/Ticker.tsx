@@ -2,10 +2,10 @@ import { motion } from "motion/react";
 import { TbAsterisk } from "react-icons/tb";
 
 const items: string[] = [
-    "LOUISIANA STEAK",
-    "FILET",
-    "RIBEYE",
-    "RUMP STEAK",
+    "BEEF BURGERS",
+    "SPICY PIZZA",
+    "ZINGER CRUNCH",
+    "FAJITA PIZZA",
 ];
 
 const InfiniteTicker: React.FC = () => {

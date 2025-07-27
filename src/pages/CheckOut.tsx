@@ -1,6 +1,5 @@
 
 import { useState } from "react";
-import { Link } from "react-router";
 
 import { FiTruck, FiShoppingBag } from "react-icons/fi";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
@@ -14,7 +13,6 @@ import Toast from "../components/Toast";
 
 import { placeOrder } from "../utils/placeOrder";
 
-
 export type OrderType = "delivery" | "takeaway";
 export type PaymentMethod = "cod" | "bank";
 
@@ -24,6 +22,7 @@ export type TakeawayFormData = {
     phone: string;
     pickupTime: string;
     instructions: string;
+    confirmation: string;
 };
 
 export type DeliveryFormData = {
@@ -33,6 +32,7 @@ export type DeliveryFormData = {
     address: string;
     postalCode: string;
     instructions: string;
+    confirmation: string;
 };
 
 const CheckoutPage = () => {
@@ -46,6 +46,8 @@ const CheckoutPage = () => {
         phone: "",
         pickupTime: "",
         instructions: "",
+        confirmation: 'pending'
+
     });
 
     const [deliveryForm, setDeliveryForm] = useState<DeliveryFormData>({
@@ -55,6 +57,7 @@ const CheckoutPage = () => {
         address: "",
         postalCode: "",
         instructions: "",
+        confirmation: 'pending',
     });
 
     const [toast, setToast] = useState<{ show: boolean; type: "success" | "failure"; message: string }>({
@@ -76,6 +79,7 @@ const CheckoutPage = () => {
             phone: "",
             pickupTime: "",
             instructions: "",
+            confirmation: 'pending',
         });
         setDeliveryForm({
             fullName: "",
@@ -84,6 +88,7 @@ const CheckoutPage = () => {
             address: "",
             postalCode: "",
             instructions: "",
+            confirmation: 'pending',
         });
     };
 

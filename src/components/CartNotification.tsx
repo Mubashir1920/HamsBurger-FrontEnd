@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { HiCheck, HiX, HiShoppingBag } from "react-icons/hi"
+import { HiX } from "react-icons/hi"
 import type { CartItem } from "../Store/Context/CartContext"
 
 export interface NotificationData {

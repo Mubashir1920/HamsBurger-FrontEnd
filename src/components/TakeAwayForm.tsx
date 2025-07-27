@@ -4,14 +4,10 @@ import { motion } from "motion/react"
 import { OrderType } from "../pages/CheckOut"
 import { FiUser, FiPhone, FiMail } from "react-icons/fi"
 
+import { type TakeawayFormData } from "../pages/CheckOut"
 
-type TakeawayFormData = {
-    fullName: string
-    email: string
-    phone: string
-    pickupTime: string
-    instructions: string
-}
+
+
 type TakeawayFormProps = {
     orderType: OrderType
     takeawayForm: TakeawayFormData
